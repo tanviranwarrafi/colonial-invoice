@@ -15,10 +15,15 @@ class InvoiceTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Text(title, style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600, fontSize: block * 2.5)),
-        isRequired
-            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w600, fontSize: block * 4))
-            : SizedBox.shrink(),
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: block * 2.5,
+            fontWeight: FontWeight.w800,
+            color: Colors.black,
+          ),
+        ),
+        isRequired ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4)) : SizedBox.shrink(),
       ],
     );
   }

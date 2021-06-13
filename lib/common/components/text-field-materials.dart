@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class TextFieldContainer extends StatelessWidget {
   final Widget textField;
+
   TextFieldContainer({this.textField});
 
   @override
@@ -26,11 +27,15 @@ textFieldDecoration({String hint}) {
   var block = SizeConfig.block;
   return InputDecoration(
     filled: true,
-    enabled: true,
-    prefixIcon: Icon(Icons.account_circle, color: Colors.grey),
+    focusColor: Colors.black,
+    // prefixIcon: Icon(Icons.account_circle, color: Colors.grey),
     fillColor: Colors.white,
+    enabled: true,
+    hoverColor: Colors.black,
+    isDense: true,
+
     // contentPadding: EdgeInsets.only(left: block * 2, right: block * 2, bottom: block * 2.5, top: block * 2.5),
-    border: InputBorder.none,
+    // border: InputBorder.none,
     hintText: hint,
     hintStyle: hintStyle(),
     errorStyle: errorStyle(),
@@ -44,14 +49,21 @@ outlineBorder({double radius, Color color, double width}) {
   );
 }
 
-hintStyle() {
-  var block = SizeConfig.block;
-  return TextStyle(color: Colors.grey, fontSize: block * 4);
+withOutBorder({double radius}) {
+  return OutlineInputBorder(
+    borderSide: BorderSide.none,
+    borderRadius: BorderRadius.circular(radius == null ? 0 : radius),
+  );
 }
 
-textStyle() {
+hintStyle() {
   var block = SizeConfig.block;
-  return TextStyle(color: Colors.black, fontSize: block * 4);
+  return TextStyle(color: Colors.grey, fontSize: block * 2);
+}
+
+textStyle({double fontSize}) {
+  var block = SizeConfig.block;
+  return TextStyle(color: Colors.black, fontSize: fontSize == null ? block * 2.5 : fontSize);
 }
 
 errorStyle() {

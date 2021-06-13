@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
-class HomeController extends GetxController {
+class HomeController with ChangeNotifier {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController driverLicController = TextEditingController();
@@ -22,13 +24,27 @@ class HomeController extends GetxController {
   TextEditingController makeController = TextEditingController();
   TextEditingController modelController = TextEditingController();
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
+  TextEditingController smogTestController = TextEditingController();
+  TextEditingController pretestController = TextEditingController();
+  TextEditingController smogCertificateController = TextEditingController();
+  TextEditingController retestController = TextEditingController();
+  TextEditingController totalSmogServiceFeeController = TextEditingController();
 
-  @override
-  void onClose() {
+  TextEditingController registrationFeeController = TextEditingController();
+  TextEditingController taxesController = TextEditingController();
+  TextEditingController epfController = TextEditingController();
+  TextEditingController citationsController = TextEditingController();
+  TextEditingController totalDmvFeesController = TextEditingController();
+
+  TextEditingController registrationServiceFeeController = TextEditingController();
+  TextEditingController vinVerificationController = TextEditingController();
+  TextEditingController dayPermitController = TextEditingController();
+  TextEditingController creditDebitController = TextEditingController();
+  TextEditingController totalRegistrationFeeController = TextEditingController();
+
+  bool loader = false;
+
+  disposeController() {
     nameController.clear();
     dateController.clear();
     driverLicController.clear();
@@ -48,6 +64,25 @@ class HomeController extends GetxController {
     yearController.clear();
     makeController.clear();
     modelController.clear();
-    super.onClose();
+
+    smogTestController.clear();
+    pretestController.clear();
+    smogCertificateController.clear();
+    retestController.clear();
+    totalSmogServiceFeeController.clear();
+
+    registrationFeeController.clear();
+    taxesController.clear();
+    epfController.clear();
+    citationsController.clear();
+    totalDmvFeesController.clear();
+
+    registrationServiceFeeController.clear();
+    vinVerificationController.clear();
+    dayPermitController.clear();
+    creditDebitController.clear();
+    totalRegistrationFeeController.clear();
+
+    loader = false;
   }
 }
