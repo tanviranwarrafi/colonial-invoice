@@ -1,6 +1,6 @@
-import 'package:colonial_invoice/controllers/home-controller.dart';
+import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/controllers/take-photo-controller.dart';
-import 'package:colonial_invoice/screens/invoice-screen.dart';
+import 'package:colonial_invoice/screens/welcome-screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,13 +8,15 @@ import 'package:provider/provider.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (_) => HomeController()),
-      ChangeNotifierProvider(create: (_) => TakePhotoController()),
-    ],
-    child: MyApp(),
-  ));
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => InvoiceController()),
+        ChangeNotifierProvider(create: (_) => TakePhotoController()),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.red,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: InvoiceScreen(),
+      home: WelcomeScreen(),
     );
   }
 }

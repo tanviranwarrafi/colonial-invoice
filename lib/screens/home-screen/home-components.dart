@@ -17,13 +17,17 @@ class InvoiceTitle extends StatelessWidget {
       children: [
         Text(
           title,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: TextStyle(
-            fontSize: block * 2.5,
+            fontSize: block * 2,
             fontWeight: FontWeight.w800,
             color: Colors.black,
           ),
         ),
-        isRequired ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4)) : SizedBox.shrink(),
+        isRequired
+            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4))
+            : SizedBox.shrink(),
       ],
     );
   }

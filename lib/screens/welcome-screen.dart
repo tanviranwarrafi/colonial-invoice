@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:colonial_invoice/common/responsive.dart';
-import 'package:colonial_invoice/screens/home-screen.dart';
+import 'package:colonial_invoice/screens/home-screen/home-screen.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';

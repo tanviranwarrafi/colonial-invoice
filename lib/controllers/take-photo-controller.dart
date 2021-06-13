@@ -11,8 +11,20 @@ class TakePhotoController with ChangeNotifier {
   File selectedImage;
   bool loader = false;
 
+  /*Future getImage() async {
+    final pickedFile = await picker.getImage(source: ImageSource.camera);
+
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }*/
+
   pickImageFromCamera({BuildContext context}) async {
-    final imageFile = await imagePicker.getImage(source: ImageSource.camera, maxHeight: 1280, maxWidth: 1280);
+    final imageFile = await imagePicker.getImage(source: ImageSource.camera);
     if (imageFile != null) {
       selectedImage = File(imageFile.path);
       log(selectedImage.path);
@@ -20,13 +32,15 @@ class TakePhotoController with ChangeNotifier {
       // selectedImages.add(TaskImage(imageFile: File(imageFile.path), imagePath: imageFile.path));
       notifyListeners();
     } else {
-      Navigator.pop(context);
+      snackbar(context: context, message: 'Image Not Picked');
+      // Navigator.pop(context);
       // Get.rawSnackbar(message: 'Image Not Picked');
     }
   }
 
   disposeController() {
     selectedImage = null;
+    loader = false;
   }
 
   void snackbar({BuildContext context, String message}) {

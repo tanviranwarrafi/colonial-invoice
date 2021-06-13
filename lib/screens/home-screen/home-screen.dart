@@ -1,7 +1,6 @@
 import 'package:colonial_invoice/common/components/buttons.dart';
 import 'package:colonial_invoice/common/responsive.dart';
-import 'package:colonial_invoice/controllers/home-controller.dart';
-import 'package:colonial_invoice/screens/invoice-screen.dart';
+import 'package:colonial_invoice/screens/inviuce-screen/invoice-screen.dart';
 import 'package:colonial_invoice/screens/take-photo-screen.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
@@ -14,7 +13,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
-  HomeController controller = HomeController();
   TabController tabController;
 
   @override
@@ -31,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   void dispose() {
-    controller.disposeController();
     super.dispose();
   }
 
