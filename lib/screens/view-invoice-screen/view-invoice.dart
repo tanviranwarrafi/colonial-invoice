@@ -1,7 +1,7 @@
 import 'package:colonial_invoice/common/components/header.dart';
 import 'package:colonial_invoice/common/responsive.dart';
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/customer-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/service-fee-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/vehicle-info.dart';

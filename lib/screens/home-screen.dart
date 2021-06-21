@@ -1,6 +1,6 @@
 import 'package:colonial_invoice/common/components/buttons.dart';
 import 'package:colonial_invoice/common/responsive.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-screen.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-screen.dart';
 import 'package:colonial_invoice/screens/take-photo-screen.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
@@ -17,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   void initState() {
-    // controller.onInit();
     tabController = TabController(vsync: this, length: 2);
     super.initState();
   }

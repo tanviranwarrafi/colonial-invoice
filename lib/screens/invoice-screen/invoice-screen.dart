@@ -1,14 +1,16 @@
+import 'package:colonial_invoice/common/components/buttons.dart';
 import 'package:colonial_invoice/common/components/header.dart';
 import 'package:colonial_invoice/common/responsive.dart';
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/customer-scetion.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/dmv-fees.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/grand-total.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/registration-fees.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/smog-service-fees.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/terms-and-conditions.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/sections/vehicle-section.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/customer-scetion.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/dmv-fees.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/grand-total.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/registration-fees.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/signature-section.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/smog-service-fees.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/terms-and-conditions.dart';
+import 'package:colonial_invoice/screens/invoice-screen/sections/vehicle-section.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/cupertino.dart';
@@ -105,10 +107,42 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
                   GrandTotal(),
                   SizedBox(height: block * 3),
                   TermsAndConditions(),
+                  SizedBox(height: block * 3),
+                  SignatureSection(),
                 ],
               ),
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: Container(
+        margin: EdgeInsets.all(block * 3),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CustomRaisedButton(
+              width: width / 4,
+              title: 'Back To Home',
+              padding: block * 2,
+              background: Colors.red,
+              borderRadius: block / 2,
+              fontColor: Colors.white,
+              fontSize: block * 2,
+              onTap: () {},
+            ),
+            SizedBox(width: block * 2.5),
+            CustomRaisedButton(
+              width: width / 4,
+              title: 'Next',
+              padding: block * 2,
+              background: Colors.black,
+              borderRadius: block / 2,
+              fontColor: Colors.white,
+              fontSize: block * 2,
+              onTap: () {},
+            ),
+          ],
         ),
       ),
     );

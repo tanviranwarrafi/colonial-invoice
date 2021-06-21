@@ -1,5 +1,5 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
@@ -40,27 +40,21 @@ class VehicleInfo extends StatelessWidget {
                       Flexible(
                         flex: 5,
                         child: InvoiceTitle(
-                            title: controller.vinController.text == null
-                                ? 'VIN #: Not Found'
-                                : 'VIN #: ${controller.vinController.text}',
+                            title: controller.vinController.text == null ? 'VIN #: Not Found' : 'VIN #: ${controller.vinController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.cashController.text == null
-                                ? 'CASH: Not Found'
-                                : 'CASH: ${controller.cashController.text}',
+                            title: controller.cashController.text == null ? 'CASH: Not Found' : 'CASH: ${controller.cashController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.cardController.text == null
-                                ? 'CARD: Not Found'
-                                : 'CARD: ${controller.cardController.text}',
+                            title: controller.cardController.text == null ? 'CARD: Not Found' : 'CARD: ${controller.cardController.text}',
                             isRequired: false),
                       ),
                     ],
@@ -81,9 +75,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.stateController.text == null
-                                ? 'STATE: Not Found'
-                                : 'STATE: ${controller.stateController.text}',
+                            title:
+                                controller.stateController.text == null ? 'STATE: Not Found' : 'STATE: ${controller.stateController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
@@ -113,27 +106,22 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.yearController.text == null
-                                ? 'YEAR: Not Found'
-                                : 'YEAR: ${controller.yearController.text}',
+                            title: controller.yearController.text == null ? 'YEAR: Not Found' : 'YEAR: ${controller.yearController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.makeController.text == null
-                                ? 'MAKE: Not Found'
-                                : 'MAKE: ${controller.makeController.text}',
+                            title: controller.makeController.text == null ? 'MAKE: Not Found' : 'MAKE: ${controller.makeController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.modelController.text == null
-                                ? 'MODEL: Not Found'
-                                : 'MODEL: ${controller.modelController.text}',
+                            title:
+                                controller.modelController.text == null ? 'MODEL: Not Found' : 'MODEL: ${controller.modelController.text}',
                             isRequired: false),
                       ),
                     ],

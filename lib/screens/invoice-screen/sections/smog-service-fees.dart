@@ -1,11 +1,11 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DMVFees extends StatelessWidget {
+class SmogServiceFees extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var block = SizeConfig.block;
@@ -17,11 +17,11 @@ class DMVFees extends StatelessWidget {
           TableRow(decoration: BoxDecoration(color: Colors.red), children: [
             ServiceTitle(
               alignment: MainAxisAlignment.start,
-              title: 'DMV FEES',
+              title: 'SMOG SERVICES FEES',
               titleColor: Colors.white,
-              size: block * 3,
-              svgImage: Images.dmv,
-              imageColor: null,
+              size: block * 1.5,
+              svgImage: Images.foggy,
+              imageColor: Colors.white,
             ),
           ]),
           TableRow(children: [SizedBox(height: block)]),
@@ -51,31 +51,31 @@ class DMVFees extends StatelessWidget {
                 TableRow(
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
-                    TableRowTitle(title: 'RGISTRATION FEE', background: Color(0xFFF2F2F3)),
+                    TableRowTitle(title: 'SMOG TEST', background: Color(0xFFF2F2F3)),
                     TableRowInput(
                       readOnly: false,
-                      controller: controller.registrationFeeController,
+                      controller: controller.smogTestController,
                       color: Color(0xFFE6E6E8),
                     ),
                   ],
                 ),
                 TableRow(children: [
-                  TableRowTitle(title: 'TAXES', background: Color(0xFFE6E6E8)),
+                  TableRowTitle(title: 'SMOG CERTIGFICATE', background: Color(0xFFE6E6E8)),
                   TableRowInput(
                     readOnly: false,
-                    controller: controller.taxesController,
+                    controller: controller.smogCertificateController,
                     color: Color(0xFFE6E6E8),
                   )
                 ]),
                 TableRow(children: [
                   TableRowTitle(
-                    title: 'EPF',
+                    title: 'RETEST',
                     background: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
                   TableRowInput(
                     readOnly: false,
-                    controller: controller.epfController,
+                    controller: controller.pretestController,
                     color: Color(0xFFE6E6E8),
                     height: block * 5,
                   )
@@ -90,8 +90,8 @@ class DMVFees extends StatelessWidget {
                     height: block * 5,
                   ),
                   TableRowInput(
-                    readOnly: false,
-                    controller: controller.totalDmvFeesController,
+                    readOnly: true,
+                    controller: controller.totalSmogServiceFeeController,
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
                   )

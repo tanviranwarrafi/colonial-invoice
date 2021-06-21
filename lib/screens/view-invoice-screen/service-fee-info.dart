@@ -1,5 +1,5 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -161,14 +161,11 @@ class VinFeesInfo extends StatelessWidget {
                               : 'REGISTRATION FEE: ${controller.registrationFeeController.text}')),
                   Expanded(
                       child: TitleText(
-                          title: controller.taxesController.text == null
-                              ? 'TAXES: Not Found'
-                              : 'TAXES: ${controller.taxesController.text}')),
+                          title:
+                              controller.taxesController.text == null ? 'TAXES: Not Found' : 'TAXES: ${controller.taxesController.text}')),
                   Expanded(
                       child: TitleText(
-                          title: controller.epfController.text == null
-                              ? 'E.P.F: Not Found'
-                              : 'E.P.F: ${controller.epfController.text}')),
+                          title: controller.epfController.text == null ? 'E.P.F: Not Found' : 'E.P.F: ${controller.epfController.text}')),
                   Expanded(
                       child: TitleText(
                           title: controller.citationsController.text == null

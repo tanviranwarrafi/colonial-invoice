@@ -29,10 +29,7 @@ class SectionTitle extends StatelessWidget {
         Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: block * 2.8,
-            color: titleColor,
-          ),
+          style: TextStyle(fontSize: block * 2.8, color: titleColor),
         ),
       ],
     );
@@ -103,9 +100,7 @@ class InvoiceTitle extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        isRequired
-            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4))
-            : SizedBox.shrink(),
+        isRequired ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4)) : SizedBox.shrink(),
       ],
     );
   }

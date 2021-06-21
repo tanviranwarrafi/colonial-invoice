@@ -1,5 +1,5 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
@@ -57,9 +57,8 @@ class CustomerInfo extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.dateController.text == null
-                                ? 'DATE: No Date Found'
-                                : 'DATE: ${controller.dateController.text}',
+                            title:
+                                controller.dateController.text == null ? 'DATE: No Date Found' : 'DATE: ${controller.dateController.text}',
                             isRequired: false),
                       ),
                     ],
