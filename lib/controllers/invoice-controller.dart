@@ -1,4 +1,4 @@
-import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-screen.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

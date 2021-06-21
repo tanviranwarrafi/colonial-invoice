@@ -1,8 +1,9 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class VehicleInfo extends StatelessWidget {
@@ -11,19 +12,14 @@ class VehicleInfo extends StatelessWidget {
     var block = SizeConfig.block;
     InvoiceController controller = Provider.of<InvoiceController>(context);
     return Container(
-      margin: EdgeInsets.only(left: block * 2, right: block * 2),
+      height: block * 18,
       decoration: BoxDecoration(
-        color: Colors.transparent,
-        // border: Border.all(color: Colors.black, width: 1.5),
-        border: Border(
-          left: BorderSide(color: Colors.grey, width: 1.5),
-          right: BorderSide(color: Colors.grey, width: 1.5),
-          bottom: BorderSide(color: Colors.grey, width: 1.5),
-        ),
+        color: Color(0xFFE9E9E7),
+        border: Border.all(color: Colors.black, width: 3),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             flex: 4,
@@ -37,28 +33,35 @@ class VehicleInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Flexible(
+                      Expanded(
                         flex: 5,
                         child: InvoiceTitle(
-                            title: controller.vinController.text == null ? 'VIN #: Not Found' : 'VIN #: ${controller.vinController.text}',
+                            title: controller.vinController.text == null
+                                ? 'VIN #: Not Found'
+                                : 'VIN #: ${controller.vinController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.cashController.text == null ? 'CASH: Not Found' : 'CASH: ${controller.cashController.text}',
+                            title: controller.cashController.text == null
+                                ? 'CASH: Not Found'
+                                : 'CASH: ${controller.cashController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.cardController.text == null ? 'CARD: Not Found' : 'CARD: ${controller.cardController.text}',
+                            title: controller.cardController.text == null
+                                ? 'CARD: Not Found'
+                                : 'CARD: ${controller.cardController.text}',
                             isRequired: false),
                       ),
                     ],
                   ),
+                  SizedBox(height: block * 1.2),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -75,8 +78,9 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title:
-                                controller.stateController.text == null ? 'STATE: Not Found' : 'STATE: ${controller.stateController.text}',
+                            title: controller.stateController.text == null
+                                ? 'STATE: Not Found'
+                                : 'STATE: ${controller.stateController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
@@ -90,6 +94,7 @@ class VehicleInfo extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: block * 1.2),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -106,22 +111,27 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.yearController.text == null ? 'YEAR: Not Found' : 'YEAR: ${controller.yearController.text}',
+                            title: controller.yearController.text == null
+                                ? 'YEAR: Not Found'
+                                : 'YEAR: ${controller.yearController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.makeController.text == null ? 'MAKE: Not Found' : 'MAKE: ${controller.makeController.text}',
+                            title: controller.makeController.text == null
+                                ? 'MAKE: Not Found'
+                                : 'MAKE: ${controller.makeController.text}',
                             isRequired: false),
                       ),
                       SizedBox(width: block),
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title:
-                                controller.modelController.text == null ? 'MODEL: Not Found' : 'MODEL: ${controller.modelController.text}',
+                            title: controller.modelController.text == null
+                                ? 'MODEL: Not Found'
+                                : 'MODEL: ${controller.modelController.text}',
                             isRequired: false),
                       ),
                     ],
@@ -131,13 +141,14 @@ class VehicleInfo extends StatelessWidget {
             ),
           ),
           SizedBox(width: block),
-          Container(width: 2, height: block * 10, color: Colors.black),
-          SizedBox(width: block),
           Expanded(
             flex: 1,
-            child: Padding(
-              padding: EdgeInsets.all(block),
-              child: CustomerContactInfo(title: 'VEHICLE INFORMATION', image: Images.car),
+            child: Container(
+              width: double.infinity,
+              color: Colors.red,
+              child: Center(
+                child: SvgPicture.asset(Images.information, width: double.infinity, height: block * 12, fit: BoxFit.cover),
+              ),
             ),
           ),
         ],
