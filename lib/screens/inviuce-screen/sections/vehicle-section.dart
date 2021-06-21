@@ -1,32 +1,25 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
-import 'package:colonial_invoice/screens/home-screen/home-components.dart';
 import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class VehicleSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var width = SizeConfig.screenWidth;
-    var height = SizeConfig.screenHeight;
     var block = SizeConfig.block;
     InvoiceController controller = Provider.of<InvoiceController>(context);
     return Container(
-      margin: EdgeInsets.only(left: block * 2, right: block * 2),
+      height: block * 18,
       decoration: BoxDecoration(
-        color: Colors.transparent,
-        // border: Border.all(color: Colors.black, width: 1.5),
-        border: Border(
-          left: BorderSide(color: Colors.grey, width: 1.5),
-          right: BorderSide(color: Colors.grey, width: 1.5),
-          bottom: BorderSide(color: Colors.grey, width: 1.5),
-        ),
+        color: Color(0xFFE9E9E7),
+        border: Border.all(color: Colors.black, width: 3),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(
             flex: 4,
@@ -40,7 +33,7 @@ class VehicleSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Flexible(
+                      Expanded(
                         flex: 5,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -95,6 +88,7 @@ class VehicleSection extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: block * 1.2),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -154,6 +148,7 @@ class VehicleSection extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: block * 1.2),
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -236,13 +231,14 @@ class VehicleSection extends StatelessWidget {
             ),
           ),
           SizedBox(width: block),
-          Container(width: 2, height: block * 10, color: Colors.black),
-          SizedBox(width: block),
           Expanded(
             flex: 1,
-            child: Padding(
-              padding: EdgeInsets.all(block),
-              child: CustomerContactInfo(title: 'VEHICLE INFORMATION', image: Images.car),
+            child: Container(
+              width: double.infinity,
+              color: Colors.red,
+              child: Center(
+                child: SvgPicture.asset(Images.information, width: double.infinity, height: block * 12, fit: BoxFit.cover),
+              ),
             ),
           ),
         ],

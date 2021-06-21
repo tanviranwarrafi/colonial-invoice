@@ -92,7 +92,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   Widget invoice(BuildContext context) {
     var block = SizeConfig.block;
     var width = SizeConfig.screenWidth;
-    bool isWeb = Responsive.isDesktop(context);
     return CustomRaisedButton(
       width: width / 2.5,
       padding: block * 2.5,

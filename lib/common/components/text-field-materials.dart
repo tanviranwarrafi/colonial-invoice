@@ -24,7 +24,6 @@ class TextFieldContainer extends StatelessWidget {
 }
 
 textFieldDecoration({String hint}) {
-  var block = SizeConfig.block;
   return InputDecoration(
     filled: true,
     focusColor: Colors.black,
@@ -45,7 +44,7 @@ textFieldDecoration({String hint}) {
 outlineBorder({double radius, Color color, double width}) {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(radius == null ? 0 : radius),
-    borderSide: BorderSide(color: color == null ? Colors.black54 : color, width: width == null ? 0 : width),
+    borderSide: BorderSide(color: color == null ? Colors.white : color, width: width == null ? 0 : width),
   );
 }
 

@@ -70,7 +70,9 @@ class SmogServiceFee extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Expanded(child: TitleText(title: 'SMOG TEST')),
-                          Expanded(child: TitleInput(readOnly: false, controller: controller.smogTestController)),
+                          Expanded(
+                            child: TitleInput(readOnly: false, controller: controller.smogTestController),
+                          ),
                         ],
                       ),
                     ),
@@ -109,7 +111,7 @@ class SmogServiceFee extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(child: TitleText(title: 'TOTAL', isBoldText: true, fontSize: block*2.5)),
+                          Expanded(child: TitleText(title: 'TOTAL', isBoldText: true, fontSize: block * 2.5)),
                           Expanded(child: TitleInput(readOnly: true, controller: controller.totalSmogServiceFeeController)),
                         ],
                       ),

@@ -41,8 +41,11 @@ class InvoiceController with ChangeNotifier {
   TextEditingController registrationServiceFeeController = TextEditingController();
   TextEditingController vinVerificationController = TextEditingController();
   TextEditingController dayPermitController = TextEditingController();
-  TextEditingController creditDebitController = TextEditingController();
   TextEditingController totalRegistrationFeeController = TextEditingController();
+
+  TextEditingController creditDebitController = TextEditingController();
+  TextEditingController grandTotalController = TextEditingController();
+
   String selectedDate;
   bool loader = false;
 
@@ -82,8 +85,10 @@ class InvoiceController with ChangeNotifier {
     registrationServiceFeeController.clear();
     vinVerificationController.clear();
     dayPermitController.clear();
-    creditDebitController.clear();
     totalRegistrationFeeController.clear();
+
+    creditDebitController.clear();
+    grandTotalController.clear();
 
     loader = false;
   }

@@ -5,7 +5,6 @@ import 'package:colonial_invoice/screens/inviuce-screen/invoice-components.dart'
 import 'package:colonial_invoice/screens/view-invoice-screen/customer-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/service-fee-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/vehicle-info.dart';
-import 'package:colonial_invoice/services/validators.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,9 +38,6 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
     var width = SizeConfig.screenWidth;
     var height = SizeConfig.screenHeight;
     var block = SizeConfig.block;
-    bool isWeb = Responsive.isDesktop(context);
-    Validators validators = Validators();
-
     return Scaffold(
       body: Container(
         child: Responsive(
