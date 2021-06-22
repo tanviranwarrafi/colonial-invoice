@@ -75,7 +75,7 @@ class SmogServiceFees extends StatelessWidget {
                   ),
                   TableRowInput(
                     readOnly: false,
-                    controller: controller.pretestController,
+                    controller: controller.retestController,
                     color: Color(0xFFE6E6E8),
                     height: block * 5,
                   )

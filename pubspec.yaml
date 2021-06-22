@@ -21,6 +21,7 @@ dependencies:
   double_back_to_close: ^2.0.0
   provider: ^5.0.0
   flutter_datetime_picker: ^1.5.1
+  simple_moment: ^1.1.1
 
 dev_dependencies:
   flutter_test:

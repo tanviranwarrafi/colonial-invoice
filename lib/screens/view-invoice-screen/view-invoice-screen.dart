@@ -5,6 +5,7 @@ import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/customer-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/dmv-fees-info.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/sections/questions-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/registration-fees-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/smog-service-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/vehicle-info.dart';
@@ -99,87 +100,22 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
                       RegistrationFeesInfo(),
                     ],
                   ),
-                  /*Expanded(flex: 2, child: ColonialHeader()),*/
-                  /*  Expanded(flex: 3, child: CustomerInfo()),*/
-                  /*Expanded(flex: 2, child: VehicleInfo()),*/
-                  /*Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: EdgeInsets.only(left: block * 2, right: block * 2),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border: Border(
-                          top: BorderSide(color: Colors.grey, width: 1.5),
-                          left: BorderSide(color: Colors.grey, width: 1.5),
-                          right: BorderSide(color: Colors.grey, width: 1.5),
-                          bottom: BorderSide(color: Colors.grey, width: 1.5),
-                        ),
+                  SizedBox(height: block * 3),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Icon(Icons.help_outline, color: Colors.red, size: block * 4.5),
+                      SizedBox(width: block),
+                      Text(
+                        'Transfer Out-of-state Questions',
+                        textAlign: TextAlign.start,
+                        style: TextStyle(fontSize: block * 2.8, color: Colors.black),
                       ),
-                      child: RowTitle(title: 'SERVICE FEE', image: Images.dollar),
-                    ),
-                  ),*/
-                  /*Expanded(
-                    flex: 4,
-                    child: Container(
-                      margin: EdgeInsets.only(left: block * 2, right: block * 2),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SmogServiceFeeInfo(),
-                          VinFeesInfo(),
-                          RegistrationFeesInfo(),
-                        ],
-                      ),
-                    ),
-                  ),*/
-                  /*Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: EdgeInsets.only(left: block * 2, right: block * 2),
-                      // padding: EdgeInsets.all(block * 2),
-                      decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border: Border(
-                          left: BorderSide(color: Colors.grey, width: 1.5),
-                          right: BorderSide(color: Colors.grey, width: 1.5),
-                          bottom: BorderSide(color: Colors.grey, width: 1.5),
-                        ),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(child: Container()),
-                          Expanded(
-                              child: Container(
-                                height: double.infinity,
-                                decoration: BoxDecoration(
-                                  border: Border(
-                                    right: BorderSide(color: Colors.grey, width: 1.5),
-                                  ),
-                                ),
-                                child: Center(child: TitleText(title: 'Grand Total', isBoldText: true, fontSize: block * 3)),
-                              )),
-                          Expanded(child: Container()),
-                        ],
-                      ),
-                    ),
-                  ),*/
-                  /*Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: CustomRaisedButton(
-                          width: width / 2.5,
-                          padding: block * 2.5,
-                          background: Colors.black,
-                          borderRadius: block / 2,
-                          fontColor: Colors.white,
-                          fontSize: block * 3,
-                          title: 'View Invoice',
-                          onTap: () => null),
-                    ),
-                  ),*/
+                    ],
+                  ),
+                  SizedBox(height: block * 1.5),
+                  QuestionsInfo(),
                 ],
               ),
             ),

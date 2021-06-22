@@ -1,5 +1,6 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
@@ -52,20 +53,12 @@ class DMVFeesInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'RGISTRATION FEE', background: Color(0xFFF2F2F3)),
-                    TableRowInput(
-                      readOnly: false,
-                      controller: controller.registrationFeeController,
-                      color: Color(0xFFE6E6E8),
-                    ),
+                    TitleText(title: '${controller.registrationFeeController.text}', color: Color(0xFFF2F2F3)),
                   ],
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'TAXES', background: Color(0xFFE6E6E8)),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.taxesController,
-                    color: Color(0xFFE6E6E8),
-                  )
+                  TitleText(title: '${controller.taxesController.text}', color: Color(0xFFE6E6E8)),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -73,12 +66,11 @@ class DMVFeesInfo extends StatelessWidget {
                     background: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.epfController,
-                    color: Color(0xFFE6E6E8),
+                  TitleText(
+                    title: '${controller.epfController.text}',
+                    color: Color(0xFFF2F2F3),
                     height: block * 5,
-                  )
+                  ),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -89,12 +81,11 @@ class DMVFeesInfo extends StatelessWidget {
                     alignment: MainAxisAlignment.end,
                     height: block * 5,
                   ),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.totalDmvFeesController,
+                  TitleText(
+                    title: '${controller.totalDmvFeesController.text}',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
-                  )
+                  ),
                 ]),
               ],
             ),

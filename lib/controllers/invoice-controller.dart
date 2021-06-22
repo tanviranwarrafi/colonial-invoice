@@ -2,6 +2,8 @@ import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-screen
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:simple_moment/simple_moment.dart';
 
 class InvoiceController with ChangeNotifier {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -27,7 +29,7 @@ class InvoiceController with ChangeNotifier {
   TextEditingController modelController = TextEditingController();
 
   TextEditingController smogTestController = TextEditingController();
-  TextEditingController pretestController = TextEditingController();
+  // TextEditingController pretestController = TextEditingController();
   TextEditingController smogCertificateController = TextEditingController();
   TextEditingController retestController = TextEditingController();
   TextEditingController totalSmogServiceFeeController = TextEditingController();
@@ -35,7 +37,7 @@ class InvoiceController with ChangeNotifier {
   TextEditingController registrationFeeController = TextEditingController();
   TextEditingController taxesController = TextEditingController();
   TextEditingController epfController = TextEditingController();
-  TextEditingController citationsController = TextEditingController();
+  // TextEditingController citationsController = TextEditingController();
   TextEditingController totalDmvFeesController = TextEditingController();
 
   TextEditingController registrationServiceFeeController = TextEditingController();
@@ -46,7 +48,14 @@ class InvoiceController with ChangeNotifier {
   TextEditingController creditDebitController = TextEditingController();
   TextEditingController grandTotalController = TextEditingController();
 
-  String selectedDate;
+  String isRegistrationCard = 'No';
+  String lastEnterDate = 'null';
+  TextEditingController estimatedValue = TextEditingController();
+  String buyCarDate = 'null';
+  String isFinanced = 'Financed';
+  TextEditingController bankName = TextEditingController();
+  TextEditingController bankAddress = TextEditingController();
+
   bool loader = false;
 
   disposeController() {
@@ -71,7 +80,7 @@ class InvoiceController with ChangeNotifier {
     modelController.clear();
 
     smogTestController.clear();
-    pretestController.clear();
+    // pretestController.clear();
     smogCertificateController.clear();
     retestController.clear();
     totalSmogServiceFeeController.clear();
@@ -79,7 +88,7 @@ class InvoiceController with ChangeNotifier {
     registrationFeeController.clear();
     taxesController.clear();
     epfController.clear();
-    citationsController.clear();
+    // citationsController.clear();
     totalDmvFeesController.clear();
 
     registrationServiceFeeController.clear();
@@ -91,6 +100,48 @@ class InvoiceController with ChangeNotifier {
     grandTotalController.clear();
 
     loader = false;
+  }
+
+  haveRegistrationCard({String value}) {
+    isRegistrationCard = value;
+    notifyListeners();
+  }
+
+  selectLastEnterDate({BuildContext context}) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      onConfirm: (date) {
+        if (date != null) {
+          lastEnterDate = Moment.fromDate(date).format('dd-MM-yyyy');
+          notifyListeners();
+        } else {
+          snackbar(context: context, message: 'Date not selected');
+        }
+      },
+    );
+  }
+
+  selectBuyCarDate({BuildContext context}) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      onConfirm: (date) {
+        if (date != null) {
+          buyCarDate = Moment.fromDate(date).format('dd-MM-yyyy');
+          notifyListeners();
+        } else {
+          snackbar(context: context, message: 'Date not selected');
+        }
+      },
+    );
+  }
+
+  selectFinancedVehicle({String value}) {
+    isRegistrationCard = value;
+    notifyListeners();
   }
 
   validateCustomerInfo(BuildContext context) {
@@ -175,18 +226,19 @@ class InvoiceController with ChangeNotifier {
 
   validateSmogTestInfo(BuildContext context) {
     if (smogTestController.text.length < 1) {
-      if (pretestController.text.length < 1) {
-        if (smogCertificateController.text.length < 1) {
-          if (retestController.text.length < 1) {
-            validateDmvFeesInfo(context);
-          } else {
-            snackbar(context: context, message: 'Please enter retest amount');
-          }
-        } else {
-          snackbar(context: context, message: 'Please enter smog certificate amount');
-        }
+      /*if (pretestController.text.length < 1) {
+
       } else {
         snackbar(context: context, message: 'Please enter pretest amount');
+      }*/
+      if (smogCertificateController.text.length < 1) {
+        if (retestController.text.length < 1) {
+          validateDmvFeesInfo(context);
+        } else {
+          snackbar(context: context, message: 'Please enter retest amount');
+        }
+      } else {
+        snackbar(context: context, message: 'Please enter smog certificate amount');
       }
     } else {
       snackbar(context: context, message: 'Please enter smog test amount');
@@ -197,11 +249,12 @@ class InvoiceController with ChangeNotifier {
     if (registrationFeeController.text.length < 1) {
       if (taxesController.text.length < 1) {
         if (epfController.text.length < 1) {
-          if (citationsController.text.length < 1) {
-            validateRegistrationFeeInfo(context);
+          /*if (citationsController.text.length < 1) {
+
           } else {
             snackbar(context: context, message: 'Please enter citations amount');
-          }
+          }*/
+          validateRegistrationFeeInfo(context);
         } else {
           snackbar(context: context, message: 'Please enter e.p.f amount');
         }

@@ -1,5 +1,6 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
@@ -52,33 +53,20 @@ class RegistrationFeesInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'REGISTRATION SERVICE FEE', background: Color(0xFFF2F2F3)),
-                    TableRowInput(
-                      readOnly: false,
-                      controller: controller.registrationServiceFeeController,
-                      color: Color(0xFFE6E6E8),
-                    )
+                    TitleText(title: '${controller.registrationServiceFeeController.text}', color: Color(0xFFF2F2F3)),
                   ],
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'VIN VERIFICATION', background: Color(0xFFE6E6E8)),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.vinVerificationController,
-                    color: Color(0xFFE6E6E8),
-                  ),
+                  TitleText(title: '${controller.vinVerificationController.text}', color: Color(0xFFE6E6E8)),
                 ]),
                 TableRow(children: [
-                  TableRowTitle(
-                    title: 'DAY PERMIT',
-                    background: Color(0xFFF2F2F3),
+                  TableRowTitle(title: 'DAY PERMIT', background: Color(0xFFF2F2F3), height: block * 5),
+                  TitleText(
+                    title: '${controller.dayPermitController.text}',
+                    color: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.dayPermitController,
-                    color: Color(0xFFE6E6E8),
-                    height: block * 5,
-                  )
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -89,12 +77,11 @@ class RegistrationFeesInfo extends StatelessWidget {
                     alignment: MainAxisAlignment.end,
                     height: block * 5,
                   ),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.totalRegistrationFeeController,
+                  TitleText(
+                    title: '${controller.totalRegistrationFeeController.text}',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
-                  )
+                  ),
                 ]),
               ],
             ),

@@ -58,11 +58,7 @@ class SmogServiceInfo extends StatelessWidget {
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'SMOG CERTIGFICATE', background: Color(0xFFE6E6E8)),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.smogCertificateController,
-                    color: Color(0xFFE6E6E8),
-                  )
+                  TitleText(title: '${controller.smogCertificateController.text}', color: Color(0xFFE6E6E8)),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -70,12 +66,11 @@ class SmogServiceInfo extends StatelessWidget {
                     background: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
-                  TableRowInput(
-                    readOnly: false,
-                    controller: controller.pretestController,
-                    color: Color(0xFFE6E6E8),
+                  TitleText(
+                    title: '${controller.retestController.text}',
+                    color: Color(0xFFF2F2F3),
                     height: block * 5,
-                  )
+                  ),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -87,12 +82,11 @@ class SmogServiceInfo extends StatelessWidget {
                     height: block * 5,
                     fontWeight: FontWeight.bold,
                   ),
-                  TableRowInput(
-                    readOnly: true,
-                    controller: controller.totalSmogServiceFeeController,
+                  TitleText(
+                    title: '${controller.totalSmogServiceFeeController.text}',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
-                  )
+                  ),
                 ]),
               ],
             ),

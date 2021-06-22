@@ -5,7 +5,7 @@ import 'package:colonial_invoice/utils/images.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SmogServiceFeeInfo extends StatelessWidget {
+/*class SmogServiceFeeInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     InvoiceController controller = Provider.of<InvoiceController>(context);
@@ -98,9 +98,9 @@ class SmogServiceFeeInfo extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
-class VinFeesInfo extends StatelessWidget {
+/*class VinFeesInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     InvoiceController controller = Provider.of<InvoiceController>(context);
@@ -162,11 +162,14 @@ class VinFeesInfo extends StatelessWidget {
                               : 'REGISTRATION FEE: ${controller.registrationFeeController.text}')),
                   Expanded(
                       child: TitleText(
-                          title:
-                              controller.taxesController.text == null ? 'TAXES: Not Found' : 'TAXES: ${controller.taxesController.text}')),
+                          title: controller.taxesController.text == null
+                              ? 'TAXES: Not Found'
+                              : 'TAXES: ${controller.taxesController.text}')),
                   Expanded(
                       child: TitleText(
-                          title: controller.epfController.text == null ? 'E.P.F: Not Found' : 'E.P.F: ${controller.epfController.text}')),
+                          title: controller.epfController.text == null
+                              ? 'E.P.F: Not Found'
+                              : 'E.P.F: ${controller.epfController.text}')),
                   Expanded(
                       child: TitleText(
                           title: controller.citationsController.text == null
@@ -186,7 +189,7 @@ class VinFeesInfo extends StatelessWidget {
       ),
     );
   }
-}
+}*/
 
 class RegistrationFeesInfo extends StatelessWidget {
   @override

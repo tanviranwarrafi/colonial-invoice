@@ -24,7 +24,9 @@ class InvoiceTitle extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        isRequired ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4)) : SizedBox.shrink(),
+        isRequired
+            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4))
+            : SizedBox.shrink(),
       ],
     );
   }
@@ -58,5 +60,15 @@ class TitleText extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class QuestionTitle extends StatelessWidget {
+  final String title;
+  QuestionTitle({this.title});
+  @override
+  Widget build(BuildContext context) {
+    var block = SizeConfig.block;
+    return Text(title, style: TextStyle(fontSize: block * 2.5));
   }
 }
