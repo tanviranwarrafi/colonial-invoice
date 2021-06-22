@@ -186,8 +186,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Question(
-                                          questionNo: '6.',
-                                          title: 'If lease or finance car, please write name of the bank adn address?'),
+                                          questionNo: '6.', title: 'If lease or finance car, please write name of the bank adn address?'),
                                     ],
                                   ),
                                   SizedBox(height: block),
@@ -220,12 +219,12 @@ class InvoiceSecondScreen extends StatelessWidget {
                                         child: Text('Bank Address', style: TextStyle(color: Colors.black, fontSize: block * 3)),
                                       ),
                                       SizedBox(
-                                        width: width / 3,
+                                        width: width / 2,
                                         child: QuestionInput(
                                           readOnly: false,
                                           inputType: TextInputType.number,
                                           minLine: 3,
-                                          maxLine: 5,
+                                          maxLine: 3,
                                         ),
                                       ),
                                     ],
@@ -253,26 +252,17 @@ class InvoiceSecondScreen extends StatelessWidget {
                             Text(
                               'FAST',
                               style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: block * 4,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
+                                  color: Colors.red, fontSize: block * 4, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                             ),
                             Text(
                               ',',
                               style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: block * 4,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
+                                  color: Colors.black, fontSize: block * 4, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                             ),
                             Text(
                               'FAIR',
                               style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: block * 4,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
+                                  color: Colors.red, fontSize: block * 4, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                             ),
                             Text(
                               ' ' + 'and' + ' ',
@@ -281,10 +271,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                             Text(
                               'FRIENDLY' + ' ',
                               style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: block * 4,
-                                  fontWeight: FontWeight.bold,
-                                  fontStyle: FontStyle.italic),
+                                  color: Colors.red, fontSize: block * 4, fontWeight: FontWeight.bold, fontStyle: FontStyle.italic),
                             ),
                             Text(
                               'service!',
@@ -297,9 +284,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Expanded(
-                                child: Image.asset(Images.colonialInvoice,
-                                    width: block * 25, height: block * 25, fit: BoxFit.cover)),
+                            Expanded(child: Image.asset(Images.colonialInvoice, width: block * 25, height: block * 25, fit: BoxFit.cover)),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -307,11 +292,9 @@ class InvoiceSecondScreen extends StatelessWidget {
                                 children: [
                                   Text('+1 858-267-4510', style: TextStyle(fontSize: block * 3.2, fontWeight: FontWeight.w600)),
                                   SizedBox(height: block / 2),
-                                  Text('smog@colonialgarage.net',
-                                      style: TextStyle(fontSize: block * 2.8, fontWeight: FontWeight.w600)),
+                                  Text('smog@colonialgarage.net', style: TextStyle(fontSize: block * 2.8, fontWeight: FontWeight.w600)),
                                   SizedBox(height: block / 2),
-                                  Text('www.colonialgarage.net',
-                                      style: TextStyle(fontSize: block * 2.8, fontWeight: FontWeight.w600)),
+                                  Text('www.colonialgarage.net', style: TextStyle(fontSize: block * 2.8, fontWeight: FontWeight.w600)),
                                   SizedBox(height: block / 2),
                                   Text('7618 Herschel Avenue,', style: TextStyle(fontSize: block * 2.8)),
                                   SizedBox(height: block / 2),

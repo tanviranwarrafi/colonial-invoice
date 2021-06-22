@@ -1,5 +1,6 @@
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-components.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +53,7 @@ class SmogServiceInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'SMOG TEST', background: Color(0xFFF2F2F3)),
-                    TableRowInput(
-                      readOnly: false,
-                      controller: controller.smogTestController,
-                      color: Color(0xFFE6E6E8),
-                    ),
+                    TitleText(title: '${controller.smogTestController.text}', color: Color(0xFFF2F2F3)),
                   ],
                 ),
                 TableRow(children: [
@@ -88,6 +85,7 @@ class SmogServiceInfo extends StatelessWidget {
                     textAlign: TextAlign.end,
                     alignment: MainAxisAlignment.end,
                     height: block * 5,
+                    fontWeight: FontWeight.bold,
                   ),
                   TableRowInput(
                     readOnly: true,

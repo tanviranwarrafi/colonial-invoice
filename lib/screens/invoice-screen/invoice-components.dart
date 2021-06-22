@@ -116,8 +116,9 @@ class TableRowTitle extends StatelessWidget {
   final TextAlign textAlign;
   final MainAxisAlignment alignment;
   final double height;
+  final FontWeight fontWeight;
 
-  TableRowTitle({this.title, this.titleColor, this.background, this.textAlign, this.alignment, this.height});
+  TableRowTitle({this.title, this.titleColor, this.background, this.textAlign, this.alignment, this.height, this.fontWeight});
 
   @override
   Widget build(BuildContext context) {
@@ -139,6 +140,7 @@ class TableRowTitle extends StatelessWidget {
               style: TextStyle(
                 fontSize: block * 2,
                 color: titleColor == null ? Colors.black : titleColor,
+                fontWeight: fontWeight == null ? FontWeight.normal : fontWeight,
                 // fontWeight: FontWeight.w600,
               ),
             ),
@@ -275,48 +277,6 @@ class RowTitle extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-}
-
-class TitleText extends StatelessWidget {
-  final bool left;
-  final bool right;
-  final bool top;
-  final bool bottom;
-  final String title;
-  final bool isBoldText;
-  final double fontSize;
-
-  TitleText({this.top, this.bottom, this.left, this.right, this.fontSize, this.title, this.isBoldText});
-
-  @override
-  Widget build(BuildContext context) {
-    var block = SizeConfig.block;
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        border: Border(
-          top: BorderSide(color: top == null ? Colors.transparent : Colors.grey, width: top == null ? 0 : 1.5),
-          left: BorderSide(color: left == null ? Colors.transparent : Colors.grey, width: left == null ? 0 : 1.5),
-          right: BorderSide(color: right == null ? Colors.transparent : Colors.grey, width: right == null ? 0 : 1.5),
-          bottom: BorderSide(color: bottom == null ? Colors.transparent : Colors.grey, width: bottom == null ? 0 : 1.5),
-        ),
-      ),
-      child: Padding(
-        padding: EdgeInsets.all(block),
-        child: Text(
-          title,
-          maxLines: 2,
-          textAlign: TextAlign.center,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: isBoldText == null ? FontWeight.w600 : FontWeight.bold,
-            fontSize: fontSize == null ? block * 2 : fontSize,
-          ),
         ),
       ),
     );

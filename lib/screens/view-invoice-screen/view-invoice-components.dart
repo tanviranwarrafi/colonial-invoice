@@ -24,10 +24,39 @@ class InvoiceTitle extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        isRequired
-            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4))
-            : SizedBox.shrink(),
+        isRequired ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4)) : SizedBox.shrink(),
       ],
+    );
+  }
+}
+
+class TitleText extends StatelessWidget {
+  final String title;
+  final bool isBoldText;
+  final double fontSize;
+  final double height;
+  final Color color;
+
+  TitleText({this.fontSize, this.title, this.isBoldText, this.height, this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    var block = SizeConfig.block;
+    return Container(
+      height: height == null ? block * 6.5 : height,
+      color: color == null ? Colors.white : color,
+      padding: EdgeInsets.all(block),
+      child: Text(
+        title,
+        maxLines: 2,
+        textAlign: TextAlign.center,
+        overflow: TextOverflow.ellipsis,
+        style: TextStyle(
+          color: Colors.black,
+          fontWeight: isBoldText == null ? FontWeight.w600 : FontWeight.bold,
+          fontSize: fontSize == null ? block * 2 : fontSize,
+        ),
+      ),
     );
   }
 }
