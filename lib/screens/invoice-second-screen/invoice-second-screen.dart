@@ -34,13 +34,13 @@ class InvoiceSecondScreen extends StatelessWidget {
                   Stack(
                     children: [
                       Container(
-                        height: height / 1.6,
+                        height: height / 1.7,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Expanded(flex: 4, child: Container()),
-                            Expanded(flex: 3, child: Container(color: Colors.red)),
+                            Expanded(flex: 3, child: Container()),
                           ],
                         ),
                       ),
@@ -73,14 +73,16 @@ class InvoiceSecondScreen extends StatelessWidget {
                                   SizedBox(width: block * 2),
                                   CheckOption(
                                     title: 'Yes',
+                                    staticValue: 'Yes',
                                     value: controller.isRegistrationCard,
-                                    ontap: () => controller.haveRegistrationCard(value: 'Yes'),
+                                    onTap: () => controller.haveRegistrationCard(value: 'Yes'),
                                   ),
                                   SizedBox(width: block * 2),
                                   CheckOption(
                                     title: 'No',
+                                    staticValue: 'No',
                                     value: controller.isRegistrationCard,
-                                    ontap: () => controller.haveRegistrationCard(value: 'No'),
+                                    onTap: () => controller.haveRegistrationCard(value: 'No'),
                                   ),
                                   SizedBox(width: width / 8),
                                 ],
@@ -101,7 +103,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(width: block * 3.5),
-                                      Text('Date' + ': ', style: TextStyle(color: Colors.black, fontSize: block * 3)),
+                                      Text('Date' + ': ', style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
                                       SizedBox(width: block),
                                       SelectDate(
                                         onTap: () => controller.selectLastEnterDate(context: context),
@@ -164,7 +166,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(width: block * 3.5),
-                                      Text('Date' + ': ', style: TextStyle(color: Colors.black, fontSize: block * 3)),
+                                      Text('Date' + ': ', style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
                                       SizedBox(width: block),
                                       SelectDate(
                                         onTap: () => controller.selectBuyCarDate(context: context),
@@ -182,7 +184,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                     crossAxisAlignment: CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      QuestionText(questionNo: '5.', title: 'Is your vehicle finamced, leased?'),
+                                      QuestionText(questionNo: '5.', title: 'Is your vehicle financed, leased?'),
                                     ],
                                   ),
                                   SizedBox(height: block),
@@ -191,11 +193,26 @@ class InvoiceSecondScreen extends StatelessWidget {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       SizedBox(width: block * 3.5),
-                                      CheckOption(title: 'Financed', value: 'yes'),
+                                      CheckOption(
+                                        title: 'Financed',
+                                        staticValue: 'Financed',
+                                        value: controller.isFinanced,
+                                        onTap: () => controller.selectFinancedVehicle(value: 'Financed'),
+                                      ),
                                       SizedBox(width: block * 4),
-                                      CheckOption(title: 'Leased', value: 'no'),
+                                      CheckOption(
+                                        title: 'Leased',
+                                        staticValue: 'Leased',
+                                        value: controller.isFinanced,
+                                        onTap: () => controller.selectFinancedVehicle(value: 'Leased'),
+                                      ),
                                       SizedBox(width: block * 4),
-                                      CheckOption(title: 'Owned', value: 'no'),
+                                      CheckOption(
+                                        title: 'Owned',
+                                        staticValue: 'Owned',
+                                        value: controller.isFinanced,
+                                        onTap: () => controller.selectFinancedVehicle(value: 'Owned'),
+                                      ),
                                     ],
                                   ),
                                 ],
@@ -222,11 +239,15 @@ class InvoiceSecondScreen extends StatelessWidget {
                                       SizedBox(width: block * 3.5),
                                       SizedBox(
                                         width: width / 5,
-                                        child: Text('Bank Name', style: TextStyle(color: Colors.black, fontSize: block * 3)),
+                                        child: Text('Bank Name', style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
                                       ),
                                       SizedBox(
                                         width: width / 3,
-                                        child: QuestionInput(readOnly: false, inputType: TextInputType.number),
+                                        child: QuestionInput(
+                                          readOnly: false,
+                                          inputType: TextInputType.number,
+                                          controller: controller.bankName,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -238,7 +259,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                       SizedBox(width: block * 3.5),
                                       SizedBox(
                                         width: width / 5,
-                                        child: Text('Bank Address', style: TextStyle(color: Colors.black, fontSize: block * 3)),
+                                        child: Text('Bank Address', style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
                                       ),
                                       SizedBox(
                                         width: width / 2,
@@ -247,6 +268,7 @@ class InvoiceSecondScreen extends StatelessWidget {
                                           inputType: TextInputType.number,
                                           minLine: 3,
                                           maxLine: 3,
+                                          controller: controller.bankAddress,
                                         ),
                                       ),
                                     ],
@@ -281,7 +303,7 @@ class InvoiceSecondScreen extends StatelessWidget {
               borderRadius: block / 2,
               fontColor: Colors.white,
               fontSize: block * 2,
-              onTap: () {},
+              onTap: () => Navigator.of(context).pop(),
             ),
             SizedBox(width: block * 2.5),
             CustomRaisedButton(
@@ -292,7 +314,7 @@ class InvoiceSecondScreen extends StatelessWidget {
               borderRadius: block / 2,
               fontColor: Colors.white,
               fontSize: block * 2,
-              onTap: () {},
+              onTap: () => controller.viewInvoiceOnTap(context: context),
             ),
           ],
         ),

@@ -1,4 +1,9 @@
+import 'dart:convert';
+
+import 'package:colonial_invoice/common/api-urls.dart';
+import 'package:colonial_invoice/screens/invoice-second-screen/invoice-second-screen.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/view-invoice-screen.dart';
+import 'package:colonial_invoice/services/api-service.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +12,7 @@ import 'package:simple_moment/simple_moment.dart';
 
 class InvoiceController with ChangeNotifier {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  ApiService apiService = ApiService();
   TextEditingController nameController = TextEditingController();
   TextEditingController dateController = TextEditingController();
   TextEditingController driverLicController = TextEditingController();
@@ -29,6 +34,7 @@ class InvoiceController with ChangeNotifier {
   TextEditingController modelController = TextEditingController();
 
   TextEditingController smogTestController = TextEditingController();
+
   // TextEditingController pretestController = TextEditingController();
   TextEditingController smogCertificateController = TextEditingController();
   TextEditingController retestController = TextEditingController();
@@ -37,6 +43,7 @@ class InvoiceController with ChangeNotifier {
   TextEditingController registrationFeeController = TextEditingController();
   TextEditingController taxesController = TextEditingController();
   TextEditingController epfController = TextEditingController();
+
   // TextEditingController citationsController = TextEditingController();
   TextEditingController totalDmvFeesController = TextEditingController();
 
@@ -48,13 +55,13 @@ class InvoiceController with ChangeNotifier {
   TextEditingController creditDebitController = TextEditingController();
   TextEditingController grandTotalController = TextEditingController();
 
-  String isRegistrationCard = 'No';
-  String lastEnterDate = 'null';
   TextEditingController estimatedValue = TextEditingController();
-  String buyCarDate = 'null';
-  String isFinanced = 'Financed';
   TextEditingController bankName = TextEditingController();
   TextEditingController bankAddress = TextEditingController();
+  String isRegistrationCard = 'No';
+  String lastEnterDate = 'null';
+  String buyCarDate = 'null';
+  String isFinanced = 'Financed';
 
   bool loader = false;
 
@@ -102,57 +109,15 @@ class InvoiceController with ChangeNotifier {
     loader = false;
   }
 
-  haveRegistrationCard({String value}) {
-    isRegistrationCard = value;
-    notifyListeners();
-  }
-
-  selectLastEnterDate({BuildContext context}) {
-    DatePicker.showDatePicker(
-      context,
-      showTitleActions: true,
-      currentTime: DateTime.now(),
-      onConfirm: (date) {
-        if (date != null) {
-          lastEnterDate = Moment.fromDate(date).format('dd-MM-yyyy');
-          notifyListeners();
-        } else {
-          snackbar(context: context, message: 'Date not selected');
-        }
-      },
-    );
-  }
-
-  selectBuyCarDate({BuildContext context}) {
-    DatePicker.showDatePicker(
-      context,
-      showTitleActions: true,
-      currentTime: DateTime.now(),
-      onConfirm: (date) {
-        if (date != null) {
-          buyCarDate = Moment.fromDate(date).format('dd-MM-yyyy');
-          notifyListeners();
-        } else {
-          snackbar(context: context, message: 'Date not selected');
-        }
-      },
-    );
-  }
-
-  selectFinancedVehicle({String value}) {
-    isRegistrationCard = value;
-    notifyListeners();
-  }
-
   validateCustomerInfo(BuildContext context) {
-    if (nameController.text.length < 1) {
-      if (dateController.text.length < 1) {
-        if (driverLicController.text.length < 1) {
-          if (phoneController.text.length < 1) {
-            if (addressController.text.length < 1) {
-              if (emailController.text.length < 1 || !EmailValidator.validate(emailController.text)) {
-                if (paidAmountController.text.length < 1) {
-                  if (balanceController.text.length < 1) {
+    if (nameController.text.length > 0) {
+      if (dateController.text.length > 0) {
+        if (driverLicController.text.length > 0) {
+          if (phoneController.text.length > 0) {
+            if (addressController.text.length > 0) {
+              if (emailController.text.length > 0 && EmailValidator.validate(emailController.text)) {
+                if (paidAmountController.text.length > 0) {
+                  if (balanceController.text.length > 0) {
                     validateVehicleInfo(context);
                   } else {
                     snackbar(context: context, message: 'Please write customer balance');
@@ -181,17 +146,18 @@ class InvoiceController with ChangeNotifier {
   }
 
   validateVehicleInfo(BuildContext context) {
-    if (vinController.text.length < 1) {
-      if (cashController.text.length < 1) {
-        if (cardController.text.length < 1) {
-          if (licencePlateController.text.length < 1) {
-            if (stateController.text.length < 1) {
-              if (expirationController.text.length < 1) {
-                if (odometerController.text.length < 1) {
-                  if (yearController.text.length < 1) {
-                    if (makeController.text.length < 1) {
-                      if (modelController.text.length < 1) {
-                        validateSmogTestInfo(context);
+    if (vinController.text.length > 0) {
+      if (cashController.text.length > 0) {
+        if (cardController.text.length > 0) {
+          if (licencePlateController.text.length > 0) {
+            if (stateController.text.length > 0) {
+              if (expirationController.text.length > 0) {
+                if (odometerController.text.length > 0) {
+                  if (yearController.text.length > 0) {
+                    if (makeController.text.length > 0) {
+                      if (modelController.text.length > 0) {
+//                        validateSmogTestInfo(context);
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceSecondScreen()));
                       } else {
                         snackbar(context: context, message: 'Please write vehicle model number');
                       }
@@ -286,9 +252,128 @@ class InvoiceController with ChangeNotifier {
     }
   }
 
+  haveRegistrationCard({String value}) {
+    isRegistrationCard = value;
+    notifyListeners();
+  }
+
+  selectLastEnterDate({BuildContext context}) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      onConfirm: (date) {
+        if (date != null) {
+          lastEnterDate = Moment.fromDate(date).format('dd-MM-yyyy');
+          notifyListeners();
+        } else {
+          snackbar(context: context, message: 'Date not selected');
+        }
+      },
+    );
+  }
+
+  selectBuyCarDate({BuildContext context}) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      onConfirm: (date) {
+        if (date != null) {
+          buyCarDate = Moment.fromDate(date).format('dd-MM-yyyy');
+          notifyListeners();
+        } else {
+          snackbar(context: context, message: 'Date not selected');
+        }
+      },
+    );
+  }
+
+  selectFinancedVehicle({String value}) {
+    isFinanced = value;
+    notifyListeners();
+  }
+
   viewInvoiceOnTap({BuildContext context}) {
     // validateCustomerInfo(context);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => ViewInvoiceScreen()));
+    if (estimatedValue.text.length > 0) {
+      if (bankName.text.length > 0) {
+        if (bankAddress.text.length > 0) {
+          if (lastEnterDate != 'null') {
+            if (buyCarDate != 'null') {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ViewInvoiceScreen()));
+            } else {
+              snackbar(context: context, message: 'Please select buy car date');
+            }
+          } else {
+            snackbar(context: context, message: 'Please select last enter date');
+          }
+        } else {
+          snackbar(context: context, message: 'Please write bank address');
+        }
+      } else {
+        snackbar(context: context, message: 'Please write bank name');
+      }
+    } else {
+      snackbar(context: context, message: 'Please write estimated value');
+    }
+  }
+
+  submitInvoiceOnTap({BuildContext context}) {
+    loader = true;
+    notifyListeners();
+    Map body = {
+      "customer_name": nameController.text,
+      "date": dateController.text,
+      "driver_lic": driverLicController.text,
+      "phone_no": phoneController.text,
+      "address": addressController.text,
+      "email": emailController.text,
+      "amount_paid": paidAmountController.text,
+      "balance": balanceController.text,
+      "vin": vinController.text,
+      "cash": cashController.text,
+      "card": cardController.text,
+      "lisence_plate": licencePlateController.text,
+      "state": stateController.text,
+      "expiration": expirationController.text,
+      "odometer": odometerController.text,
+      "year": yearController.text,
+      "make": makeController.text,
+      "model": modelController.text,
+      "smog_test": smogTestController.text,
+      "pre_test": 'Not Found',
+      "smog_certificate": smogCertificateController.text,
+      "retest": retestController.text,
+      "registration_fee": registrationFeeController.text,
+      "taxes": taxesController.text,
+      "epf": epfController.text,
+      "citations": 'Not Found',
+      "registration_service_fee": registrationServiceFeeController.text,
+      "vin_verification": vinVerificationController.text,
+      "day_permit": dayPermitController.text,
+      "credit_debit": creditDebitController.text,
+      "registration_card": isRegistrationCard,
+      "last_enter_date": lastEnterDate,
+      "estimated_value_of_card": estimatedValue.text,
+      "buy_card_date": buyCarDate,
+      "vehicle_financed": isFinanced,
+      "bank_name": bankName.text,
+      "bank_address": bankAddress.text
+    };
+    String jsonBody = json.encode(body);
+    apiService.postRequest(endPoint: ApiUrl.invoice, body: jsonBody).then((value) {
+      print(value.body);
+      if (value != null) {
+        print(value.body);
+        snackbar(context: context, message: 'Invoice sent to ${nameController.text}');
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      } else {
+        snackbar(context: context, message: 'Oops!! Invoice not sent. Please try again');
+      }
+    });
   }
 
   void snackbar({BuildContext context, String message}) {

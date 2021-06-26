@@ -136,7 +136,10 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
               borderRadius: block / 2,
               fontColor: Colors.white,
               fontSize: block * 2,
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pop();
+              },
             ),
             SizedBox(width: block * 2.5),
             CustomRaisedButton(
@@ -147,7 +150,7 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
               borderRadius: block / 2,
               fontColor: Colors.white,
               fontSize: block * 2,
-              onTap: () {},
+              onTap: () => controller.submitInvoiceOnTap(context: context),
             ),
           ],
         ),

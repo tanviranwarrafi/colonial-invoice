@@ -31,7 +31,7 @@ class GrandTotal extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  'CREDIT CARD % 2.5',
+                  'CREDIT CARD % 2.75',
                   style: TextStyle(fontSize: block * 2.8, color: Colors.black),
                 ),
                 SizedBox(width: block * 3),

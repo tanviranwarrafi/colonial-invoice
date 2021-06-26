@@ -16,14 +16,14 @@ class QuestionText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(questionNo, style: TextStyle(color: Colors.black, fontSize: block * 3)),
+          Text(questionNo, style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
           SizedBox(width: block),
           Flexible(
             child: Text(
               title,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: TextStyle(color: Colors.black, fontSize: block * 3),
+              style: TextStyle(color: Colors.black, fontSize: block * 2.7),
             ),
           ),
         ],
@@ -35,24 +35,25 @@ class QuestionText extends StatelessWidget {
 class CheckOption extends StatelessWidget {
   final String title;
   final String value;
-  final Function ontap;
+  final String staticValue;
+  final Function onTap;
 
-  CheckOption({this.value, this.title, this.ontap});
+  CheckOption({this.value, this.title, this.staticValue, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     var block = SizeConfig.block;
     return InkWell(
-      onTap: ontap,
+      onTap: onTap,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          value == title
+          value == staticValue
               ? Icon(Icons.check_box_rounded, color: Colors.red, size: block * 3)
               : Icon(Icons.check_box_outline_blank, color: Colors.black, size: block * 3),
           SizedBox(width: block),
-          Text(title, style: TextStyle(color: Colors.black, fontSize: block * 3)),
+          Text(staticValue, style: TextStyle(color: Colors.black, fontSize: block * 2.7)),
         ],
       ),
     );
@@ -118,9 +119,9 @@ class SelectDate extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(block / 2),
         decoration: BoxDecoration(
-          color: Colors.transparent,
-          border: Border.all(color: Colors.black54, width: 1.5),
-        ),
+            color: Colors.transparent,
+            border: Border.all(color: Colors.grey, width: 1.5),
+            borderRadius: BorderRadius.circular(block / 2)),
         child: Row(
           children: [
             Text(date, style: TextStyle(color: Colors.black, fontSize: block * 2.2)),

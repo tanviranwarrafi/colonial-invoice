@@ -115,6 +115,7 @@ class CustomerSection extends StatelessWidget {
                       child: CustomerTextField(
                         controller: controller.phoneController,
                         inputType: TextInputType.phone,
+                        readOnly: false,
                       ),
                     ),
                   ],
