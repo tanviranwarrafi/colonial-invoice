@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:colonial_invoice/common/api-urls.dart';
 import 'package:colonial_invoice/screens/invoice-second-screen/invoice-second-screen.dart';
@@ -8,6 +9,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:http/http.dart' as http;
 import 'package:simple_moment/simple_moment.dart';
 
 class InvoiceController with ChangeNotifier {
@@ -295,7 +297,6 @@ class InvoiceController with ChangeNotifier {
   }
 
   viewInvoiceOnTap({BuildContext context}) {
-    // validateCustomerInfo(context);
     if (estimatedValue.text.length > 0) {
       if (bankName.text.length > 0) {
         if (bankAddress.text.length > 0) {
@@ -319,10 +320,65 @@ class InvoiceController with ChangeNotifier {
     }
   }
 
-  submitInvoiceOnTap({BuildContext context}) {
+  submitInvoiceOnTap({BuildContext context}) async {
+    log('clicked');
     loader = true;
     notifyListeners();
-    Map body = {
+    /*print(ApiUrl.server + ApiUrl.invoice);
+    final req = http.MultipartRequest('POST', Uri.parse(ApiUrl.server + ApiUrl.invoice));
+    req.fields['customer_name'] = nameController.text;
+    req.fields['date'] = dateController.text;
+    req.fields['driver_lic'] = driverLicController.text;
+    req.fields['phone_no'] = phoneController.text;
+    req.fields['address'] = addressController.text;
+    req.fields['email'] = 'tanviranwarrafi@gmail.com';
+    req.fields['amount_paid'] = paidAmountController.text;
+    req.fields['balance'] = balanceController.text;
+    req.fields['vin'] = vinController.text;
+    req.fields['cash'] = cashController.text;
+    req.fields['card'] = cardController.text;
+    req.fields['lisence_plate'] = licencePlateController.text;
+    req.fields['state'] = stateController.text;
+    req.fields['expiration'] = expirationController.text;
+    req.fields['odometer'] = odometerController.text;
+    req.fields['year'] = yearController.text;
+    req.fields['make'] = makeController.text;
+    req.fields['model'] = modelController.text;
+    req.fields['smog_test'] = smogTestController.text;
+    req.fields['pre_test'] = 'Not Found';
+    req.fields['smog_certificate'] = smogCertificateController.text;
+    req.fields['retest'] = retestController.text;
+    req.fields['registration_fee'] = registrationFeeController.text;
+    req.fields['taxes'] = taxesController.text;
+    req.fields['epf'] = epfController.text;
+    req.fields['citations'] = 'Not Found';
+    req.fields['registration_service_fee'] = registrationServiceFeeController.text;
+    req.fields['vin_verification'] = vinVerificationController.text;
+    req.fields['day_permit'] = dayPermitController.text;
+    req.fields['credit_debit'] = creditDebitController.text;
+    req.fields['registration_card'] = isRegistrationCard;
+    req.fields['last_enter_date'] = lastEnterDate;
+    req.fields['estimated_value_of_card'] = estimatedValue.text;
+    req.fields['buy_card_date'] = buyCarDate;
+    req.fields['vehicle_financed'] = isFinanced;
+    req.fields['bank_name'] = bankName.text;
+    req.fields['bank_address'] = bankAddress.text;
+    var request = await req.send();
+
+    request.stream.transform(utf8.decoder).listen((response) async {
+      print(response);
+      if (response != null) {
+        print(response);
+        loader = false;
+        notifyListeners();
+      } else {
+        loader = false;
+        notifyListeners();
+        print('ascacnaknckanckanc');
+      }
+    });*/
+
+    /*Map body = {
       "customer_name": nameController.text,
       "date": dateController.text,
       "driver_lic": driverLicController.text,
@@ -360,20 +416,73 @@ class InvoiceController with ChangeNotifier {
       "vehicle_financed": isFinanced,
       "bank_name": bankName.text,
       "bank_address": bankAddress.text
+    };*/
+    Map body = {
+      "customer_name": nameController.text.length > 0 ? nameController.text : '',
+      "date": dateController.text.length > 0 ? dateController.text : '',
+      "driver_lic": driverLicController.text,
+      "phone_no": phoneController.text,
+      "address": addressController.text,
+      "email": 'tanviranwarrafi@gmail.com',
+      "amount_paid": paidAmountController.text,
+      "balance": balanceController.text,
+      "vin": vinController.text,
+      "cash": cashController.text,
+      "card": cardController.text,
+      "lisence_plate": licencePlateController.text,
+      "state": stateController.text,
+      "expiration": expirationController.text,
+      "odometer": odometerController.text,
+      "year": yearController.text,
+      "make": makeController.text,
+      "model": modelController.text,
+      "smog_test": smogTestController.text.length > 0 ? smogTestController.text : '0',
+      "smog_certificate": smogCertificateController.text.length > 0 ? smogCertificateController.text : '0',
+      "retest": retestController.text.length > 0 ? retestController.text : '0',
+      "registration_fee": registrationFeeController.text.length > 0 ? registrationFeeController.text : '0',
+      "taxes": taxesController.text.length > 0 ? taxesController.text : '0',
+      "epf": epfController.text.length > 0 ? epfController.text : 0,
+      "registration_service_fee": registrationServiceFeeController.text.length > 0 ? registrationServiceFeeController.text : 0,
+      "vin_verification": vinVerificationController.text.length > 0 ? vinVerificationController.text : 0,
+      "day_permit": dayPermitController.text.length > 0 ? dayPermitController.text : 0,
+      "credit_debit": creditDebitController.text.length > 0 ? creditDebitController.text : 0,
+      "registration_card": isRegistrationCard,
+      "last_enter_date": lastEnterDate,
+      "estimated_value_of_card": estimatedValue.text,
+      "buy_card_date": buyCarDate,
+      "vehicle_financed": isFinanced,
+      "bank_name": bankName.text,
+      "bank_address": bankAddress.text
     };
+    print(body);
     String jsonBody = json.encode(body);
-    apiService.postRequest(endPoint: ApiUrl.invoice, body: jsonBody).then((value) {
-      print(value.body);
-      if (value != null) {
-        print(value.body);
+    /*final response = await http.post(Uri.parse(ApiUrl.server + ApiUrl.invoice),
+        headers: <String, String>{'Accept': 'application/json', 'Content-Type': 'application/json'}, body: jsonBody);*/
+    final response = await http.post(
+      Uri.parse(ApiUrl.server + ApiUrl.invoice),
+      headers: <String, String>{
+        'Accept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(body),
+    );
+    print(response.body);
+    /*apiService.postRequest(endPoint: ApiUrl.invoice, body: jsonBody).then((response) {
+      print(response);
+      if (response != null) {
+        loader = false;
+        notifyListeners();
+        print(response.body);
         snackbar(context: context, message: 'Invoice sent to ${nameController.text}');
         Navigator.of(context).pop();
         Navigator.of(context).pop();
         Navigator.of(context).pop();
       } else {
+        loader = false;
+        notifyListeners();
         snackbar(context: context, message: 'Oops!! Invoice not sent. Please try again');
       }
-    });
+    });*/
   }
 
   void snackbar({BuildContext context, String message}) {
