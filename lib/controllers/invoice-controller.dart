@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:colonial_invoice/common/api-urls.dart';
 import 'package:colonial_invoice/screens/invoice-second-screen/invoice-second-screen.dart';
@@ -21,41 +20,43 @@ class InvoiceController with ChangeNotifier {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-  TextEditingController paidAmountController = TextEditingController();
-  TextEditingController balanceController = TextEditingController();
+//  TextEditingController paidAmountController = TextEditingController();
+//  TextEditingController balanceController = TextEditingController();
 
   TextEditingController vinController = TextEditingController();
-  TextEditingController cashController = TextEditingController();
-  TextEditingController cardController = TextEditingController();
+//  TextEditingController cashController = TextEditingController();
+//  TextEditingController cardController = TextEditingController();
   TextEditingController licencePlateController = TextEditingController();
   TextEditingController stateController = TextEditingController();
   TextEditingController expirationController = TextEditingController();
-  TextEditingController odometerController = TextEditingController();
+//  TextEditingController odometerController = TextEditingController();
   TextEditingController yearController = TextEditingController();
   TextEditingController makeController = TextEditingController();
   TextEditingController modelController = TextEditingController();
 
-  TextEditingController smogTestController = TextEditingController();
-
+  TextEditingController smogTestController = TextEditingController(text: '');
   // TextEditingController pretestController = TextEditingController();
-  TextEditingController smogCertificateController = TextEditingController();
-  TextEditingController retestController = TextEditingController();
-  TextEditingController totalSmogServiceFeeController = TextEditingController();
+  TextEditingController smogCertificateController = TextEditingController(text: '');
+  TextEditingController retestController = TextEditingController(text: '');
+  TextEditingController totalSmogServiceFeeController = TextEditingController(text: '');
 
-  TextEditingController registrationFeeController = TextEditingController();
-  TextEditingController taxesController = TextEditingController();
-  TextEditingController epfController = TextEditingController();
+  TextEditingController registrationFeeController = TextEditingController(text: '');
+  TextEditingController taxesController = TextEditingController(text: '');
+  TextEditingController epfController = TextEditingController(text: '');
 
   // TextEditingController citationsController = TextEditingController();
-  TextEditingController totalDmvFeesController = TextEditingController();
+  TextEditingController totalDmvFeesController = TextEditingController(text: '');
 
-  TextEditingController registrationServiceFeeController = TextEditingController();
-  TextEditingController vinVerificationController = TextEditingController();
-  TextEditingController dayPermitController = TextEditingController();
-  TextEditingController totalRegistrationFeeController = TextEditingController();
+  TextEditingController registrationServiceFeeController = TextEditingController(text: '');
+  TextEditingController vinVerificationController = TextEditingController(text: '');
+  TextEditingController dayPermitController = TextEditingController(text: '');
+  TextEditingController totalRegistrationFeeController = TextEditingController(text: '');
 
   TextEditingController creditDebitController = TextEditingController();
   TextEditingController grandTotalController = TextEditingController();
+
+  TextEditingController signingName = TextEditingController();
+  String signingDate = 'null';
 
   TextEditingController estimatedValue = TextEditingController();
   TextEditingController bankName = TextEditingController();
@@ -74,16 +75,16 @@ class InvoiceController with ChangeNotifier {
     phoneController.clear();
     addressController.clear();
     emailController.clear();
-    paidAmountController.clear();
-    balanceController.clear();
+//    paidAmountController.clear();
+//    balanceController.clear();
 
     vinController.clear();
-    cashController.clear();
-    cardController.clear();
+//    cashController.clear();
+//    cardController.clear();
     licencePlateController.clear();
     stateController.clear();
     expirationController.clear();
-    odometerController.clear();
+//    odometerController.clear();
     yearController.clear();
     makeController.clear();
     modelController.clear();
@@ -104,11 +105,51 @@ class InvoiceController with ChangeNotifier {
     vinVerificationController.clear();
     dayPermitController.clear();
     totalRegistrationFeeController.clear();
-
     creditDebitController.clear();
     grandTotalController.clear();
 
     loader = false;
+  }
+
+  countSmogServiceFee() {
+    double smogTest = double.parse(smogTestController.text == '' ? '0' : smogTestController.text);
+    double smogCertificate = double.parse(smogCertificateController.text == '' ? '0' : smogCertificateController.text);
+    double retest = double.parse(retestController.text == '' ? '0' : retestController.text);
+    totalSmogServiceFeeController.text = (smogTest + smogCertificate + retest).toString();
+    notifyListeners();
+    countTotalFee();
+  }
+
+  countDmvFees() {
+    double registrationFee = double.parse(registrationFeeController.text == '' ? '0' : registrationFeeController.text);
+    double taxes = double.parse(taxesController.text == '' ? '0' : taxesController.text);
+    double epf = double.parse(epfController.text == '' ? '0' : epfController.text);
+    totalDmvFeesController.text = (registrationFee + taxes + epf).toString();
+    notifyListeners();
+    countTotalFee();
+  }
+
+  countRegistrationFees() {
+    double registrationService =
+        double.parse(registrationServiceFeeController.text == '' ? '0' : registrationServiceFeeController.text);
+    double vinVerification = double.parse(vinVerificationController.text == '' ? '0' : vinVerificationController.text);
+    double dayPermit = double.parse(dayPermitController.text == '' ? '0' : dayPermitController.text);
+    totalRegistrationFeeController.text = (registrationService + vinVerification + dayPermit).toString();
+    notifyListeners();
+    countTotalFee();
+  }
+
+  countTotalFee() {
+    double totalSmogFee = double.parse(totalSmogServiceFeeController.text == '' ? '0' : totalSmogServiceFeeController.text);
+    double totalDmvFee = double.parse(totalDmvFeesController.text == '' ? '0' : totalDmvFeesController.text);
+    double totalRegistrationFee =
+        double.parse(totalRegistrationFeeController.text == '' ? '0' : totalRegistrationFeeController.text);
+
+    double grandTotal = totalSmogFee + totalDmvFee + totalRegistrationFee;
+    double creditValue = (2.75 / 100) * grandTotal;
+    creditDebitController.text = creditValue.toString();
+    grandTotalController.text = (grandTotal + creditValue).toString();
+    notifyListeners();
   }
 
   validateCustomerInfo(BuildContext context) {
@@ -118,15 +159,15 @@ class InvoiceController with ChangeNotifier {
           if (phoneController.text.length > 0) {
             if (addressController.text.length > 0) {
               if (emailController.text.length > 0 && EmailValidator.validate(emailController.text)) {
-                if (paidAmountController.text.length > 0) {
+                validateVehicleInfo(context);
+                /*if (paidAmountController.text.length > 0) {
                   if (balanceController.text.length > 0) {
-                    validateVehicleInfo(context);
                   } else {
                     snackbar(context: context, message: 'Please write customer balance');
                   }
                 } else {
                   snackbar(context: context, message: 'Please write customer\'s paid amount');
-                }
+                }*/
               } else {
                 snackbar(context: context, message: 'Please enter valid email');
               }
@@ -149,114 +190,46 @@ class InvoiceController with ChangeNotifier {
 
   validateVehicleInfo(BuildContext context) {
     if (vinController.text.length > 0) {
-      if (cashController.text.length > 0) {
-        if (cardController.text.length > 0) {
-          if (licencePlateController.text.length > 0) {
-            if (stateController.text.length > 0) {
-              if (expirationController.text.length > 0) {
-                if (odometerController.text.length > 0) {
-                  if (yearController.text.length > 0) {
-                    if (makeController.text.length > 0) {
-                      if (modelController.text.length > 0) {
-//                        validateSmogTestInfo(context);
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceSecondScreen()));
-                      } else {
-                        snackbar(context: context, message: 'Please write vehicle model number');
-                      }
-                    } else {
-                      snackbar(context: context, message: 'Please write making materials');
-                    }
-                  } else {
-                    snackbar(context: context, message: 'Please write date of year');
-                  }
+      if (licencePlateController.text.length > 0) {
+        if (stateController.text.length > 0) {
+          if (expirationController.text.length > 0) {
+            if (yearController.text.length > 0) {
+              if (makeController.text.length > 0) {
+                if (modelController.text.length > 0) {
+                  validateSigningInfo(context: context);
                 } else {
-                  snackbar(context: context, message: 'Please write odometer no');
+                  snackbar(context: context, message: 'Please write vehicle model number');
                 }
               } else {
-                snackbar(context: context, message: 'Please write expiration');
+                snackbar(context: context, message: 'Please write making materials');
               }
             } else {
-              snackbar(context: context, message: 'Please write state name');
+              snackbar(context: context, message: 'Please write date of year');
             }
           } else {
-            snackbar(context: context, message: 'Please write licence plate no');
+            snackbar(context: context, message: 'Please write expiration');
           }
         } else {
-          snackbar(context: context, message: 'Please write card no');
+          snackbar(context: context, message: 'Please write state name');
         }
       } else {
-        snackbar(context: context, message: 'Please write cash amount');
+        snackbar(context: context, message: 'Please write licence plate no');
       }
     } else {
       snackbar(context: context, message: 'Please write vehicle vin no');
     }
   }
 
-  validateSmogTestInfo(BuildContext context) {
-    if (smogTestController.text.length < 1) {
-      /*if (pretestController.text.length < 1) {
-
+  validateSigningInfo({BuildContext context}) {
+    if (signingName.text.length > 0) {
+      if (signingDate != 'null') {
+        Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceSecondScreen()));
       } else {
-        snackbar(context: context, message: 'Please enter pretest amount');
-      }*/
-      if (smogCertificateController.text.length < 1) {
-        if (retestController.text.length < 1) {
-          validateDmvFeesInfo(context);
-        } else {
-          snackbar(context: context, message: 'Please enter retest amount');
-        }
-      } else {
-        snackbar(context: context, message: 'Please enter smog certificate amount');
+        snackbar(context: context, message: 'Please sign the the form below');
       }
     } else {
-      snackbar(context: context, message: 'Please enter smog test amount');
+      snackbar(context: context, message: 'Please select signing date');
     }
-  }
-
-  validateDmvFeesInfo(BuildContext context) {
-    if (registrationFeeController.text.length < 1) {
-      if (taxesController.text.length < 1) {
-        if (epfController.text.length < 1) {
-          /*if (citationsController.text.length < 1) {
-
-          } else {
-            snackbar(context: context, message: 'Please enter citations amount');
-          }*/
-          validateRegistrationFeeInfo(context);
-        } else {
-          snackbar(context: context, message: 'Please enter e.p.f amount');
-        }
-      } else {
-        snackbar(context: context, message: 'Please enter tax amount');
-      }
-    } else {
-      snackbar(context: context, message: 'Please enter registration fee');
-    }
-  }
-
-  validateRegistrationFeeInfo(BuildContext context) {
-    if (registrationServiceFeeController.text.length < 1) {
-      if (vinVerificationController.text.length < 1) {
-        if (dayPermitController.text.length < 1) {
-          if (creditDebitController.text.length < 1) {
-            viewInvoiceOnTap(context: context);
-          } else {
-            snackbar(context: context, message: 'Please enter credit%2.5 Debit%1 amount');
-          }
-        } else {
-          snackbar(context: context, message: 'Please enter day permit amount');
-        }
-      } else {
-        snackbar(context: context, message: 'Please enter vin certification amount');
-      }
-    } else {
-      snackbar(context: context, message: 'Please enter registration service fee');
-    }
-  }
-
-  haveRegistrationCard({String value}) {
-    isRegistrationCard = value;
-    notifyListeners();
   }
 
   selectLastEnterDate({BuildContext context}) {
@@ -267,6 +240,27 @@ class InvoiceController with ChangeNotifier {
       onConfirm: (date) {
         if (date != null) {
           lastEnterDate = Moment.fromDate(date).format('dd-MM-yyyy');
+          notifyListeners();
+        } else {
+          snackbar(context: context, message: 'Date not selected');
+        }
+      },
+    );
+  }
+
+  haveRegistrationCard({String value}) {
+    isRegistrationCard = value;
+    notifyListeners();
+  }
+
+  selectSigningDate({BuildContext context}) {
+    DatePicker.showDatePicker(
+      context,
+      showTitleActions: true,
+      currentTime: DateTime.now(),
+      onConfirm: (date) {
+        if (date != null) {
+          signingDate = Moment.fromDate(date).format('dd-MM-yyyy');
           notifyListeners();
         } else {
           snackbar(context: context, message: 'Date not selected');
@@ -321,118 +315,24 @@ class InvoiceController with ChangeNotifier {
   }
 
   submitInvoiceOnTap({BuildContext context}) async {
-    log('clicked');
     loader = true;
     notifyListeners();
-    /*print(ApiUrl.server + ApiUrl.invoice);
-    final req = http.MultipartRequest('POST', Uri.parse(ApiUrl.server + ApiUrl.invoice));
-    req.fields['customer_name'] = nameController.text;
-    req.fields['date'] = dateController.text;
-    req.fields['driver_lic'] = driverLicController.text;
-    req.fields['phone_no'] = phoneController.text;
-    req.fields['address'] = addressController.text;
-    req.fields['email'] = 'tanviranwarrafi@gmail.com';
-    req.fields['amount_paid'] = paidAmountController.text;
-    req.fields['balance'] = balanceController.text;
-    req.fields['vin'] = vinController.text;
-    req.fields['cash'] = cashController.text;
-    req.fields['card'] = cardController.text;
-    req.fields['lisence_plate'] = licencePlateController.text;
-    req.fields['state'] = stateController.text;
-    req.fields['expiration'] = expirationController.text;
-    req.fields['odometer'] = odometerController.text;
-    req.fields['year'] = yearController.text;
-    req.fields['make'] = makeController.text;
-    req.fields['model'] = modelController.text;
-    req.fields['smog_test'] = smogTestController.text;
-    req.fields['pre_test'] = 'Not Found';
-    req.fields['smog_certificate'] = smogCertificateController.text;
-    req.fields['retest'] = retestController.text;
-    req.fields['registration_fee'] = registrationFeeController.text;
-    req.fields['taxes'] = taxesController.text;
-    req.fields['epf'] = epfController.text;
-    req.fields['citations'] = 'Not Found';
-    req.fields['registration_service_fee'] = registrationServiceFeeController.text;
-    req.fields['vin_verification'] = vinVerificationController.text;
-    req.fields['day_permit'] = dayPermitController.text;
-    req.fields['credit_debit'] = creditDebitController.text;
-    req.fields['registration_card'] = isRegistrationCard;
-    req.fields['last_enter_date'] = lastEnterDate;
-    req.fields['estimated_value_of_card'] = estimatedValue.text;
-    req.fields['buy_card_date'] = buyCarDate;
-    req.fields['vehicle_financed'] = isFinanced;
-    req.fields['bank_name'] = bankName.text;
-    req.fields['bank_address'] = bankAddress.text;
-    var request = await req.send();
-
-    request.stream.transform(utf8.decoder).listen((response) async {
-      print(response);
-      if (response != null) {
-        print(response);
-        loader = false;
-        notifyListeners();
-      } else {
-        loader = false;
-        notifyListeners();
-        print('ascacnaknckanckanc');
-      }
-    });*/
-
-    /*Map body = {
-      "customer_name": nameController.text,
-      "date": dateController.text,
-      "driver_lic": driverLicController.text,
-      "phone_no": phoneController.text,
-      "address": addressController.text,
-      "email": emailController.text,
-      "amount_paid": paidAmountController.text,
-      "balance": balanceController.text,
-      "vin": vinController.text,
-      "cash": cashController.text,
-      "card": cardController.text,
-      "lisence_plate": licencePlateController.text,
-      "state": stateController.text,
-      "expiration": expirationController.text,
-      "odometer": odometerController.text,
-      "year": yearController.text,
-      "make": makeController.text,
-      "model": modelController.text,
-      "smog_test": smogTestController.text,
-      "pre_test": 'Not Found',
-      "smog_certificate": smogCertificateController.text,
-      "retest": retestController.text,
-      "registration_fee": registrationFeeController.text,
-      "taxes": taxesController.text,
-      "epf": epfController.text,
-      "citations": 'Not Found',
-      "registration_service_fee": registrationServiceFeeController.text,
-      "vin_verification": vinVerificationController.text,
-      "day_permit": dayPermitController.text,
-      "credit_debit": creditDebitController.text,
-      "registration_card": isRegistrationCard,
-      "last_enter_date": lastEnterDate,
-      "estimated_value_of_card": estimatedValue.text,
-      "buy_card_date": buyCarDate,
-      "vehicle_financed": isFinanced,
-      "bank_name": bankName.text,
-      "bank_address": bankAddress.text
-    };*/
     Map body = {
       "customer_name": nameController.text.length > 0 ? nameController.text : '',
       "date": dateController.text.length > 0 ? dateController.text : '',
       "driver_lic": driverLicController.text,
       "phone_no": phoneController.text,
       "address": addressController.text,
-      "email": 'tanviranwarrafi@gmail.com',
-      "amount_paid": paidAmountController.text,
-      "balance": balanceController.text,
+      "email": emailController.text,
+      "amount_paid": '',
+      "balance": '',
       "vin": vinController.text,
-      "cash": cashController.text,
-      "card": cardController.text,
+      "cash": '',
+      "card": '',
       "lisence_plate": licencePlateController.text,
       "state": stateController.text,
       "expiration": expirationController.text,
-      "odometer": odometerController.text,
+      "odometer": '',
       "year": yearController.text,
       "make": makeController.text,
       "model": modelController.text,
@@ -452,12 +352,11 @@ class InvoiceController with ChangeNotifier {
       "buy_card_date": buyCarDate,
       "vehicle_financed": isFinanced,
       "bank_name": bankName.text,
-      "bank_address": bankAddress.text
+      "bank_address": bankAddress.text,
+      "customer_signature": signingName.text,
+      "date_service": signingDate
     };
     print(body);
-    String jsonBody = json.encode(body);
-    /*final response = await http.post(Uri.parse(ApiUrl.server + ApiUrl.invoice),
-        headers: <String, String>{'Accept': 'application/json', 'Content-Type': 'application/json'}, body: jsonBody);*/
     final response = await http.post(
       Uri.parse(ApiUrl.server + ApiUrl.invoice),
       headers: <String, String>{
@@ -467,22 +366,19 @@ class InvoiceController with ChangeNotifier {
       body: jsonEncode(body),
     );
     print(response.body);
-    /*apiService.postRequest(endPoint: ApiUrl.invoice, body: jsonBody).then((response) {
-      print(response);
-      if (response != null) {
-        loader = false;
-        notifyListeners();
-        print(response.body);
-        snackbar(context: context, message: 'Invoice sent to ${nameController.text}');
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
-      } else {
-        loader = false;
-        notifyListeners();
-        snackbar(context: context, message: 'Oops!! Invoice not sent. Please try again');
-      }
-    });*/
+    if (response != null) {
+      loader = false;
+      notifyListeners();
+      print(response.body);
+      snackbar(context: context, message: 'Invoice sent to ${nameController.text}');
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+      Navigator.of(context).pop();
+    } else {
+      loader = false;
+      notifyListeners();
+      snackbar(context: context, message: 'Oops!! Invoice not sent. Please try again');
+    }
   }
 
   void snackbar({BuildContext context, String message}) {

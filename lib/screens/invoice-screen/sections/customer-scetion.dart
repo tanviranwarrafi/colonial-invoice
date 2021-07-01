@@ -30,7 +30,7 @@ class CustomerSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InvoiceTitle(title: 'CUSTOMER NAME', isRequired: false),
+                    InvoiceTitle(title: 'CUSTOMER NAME', isRequired: true),
                     SizedBox(width: block),
                     Flexible(
                       child: CustomerTextField(
@@ -49,7 +49,7 @@ class CustomerSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InvoiceTitle(title: 'DRIVER LIC#', isRequired: false),
+                    InvoiceTitle(title: 'DRIVER LIC#', isRequired: true),
                     SizedBox(width: block),
                     Flexible(
                       child: CustomerTextField(
@@ -67,7 +67,7 @@ class CustomerSection extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InvoiceTitle(title: 'DATE', isRequired: false),
+                    InvoiceTitle(title: 'DATE', isRequired: true),
                     SizedBox(width: block),
                     Flexible(
                       child: CustomerTextField(
@@ -82,34 +82,31 @@ class CustomerSection extends StatelessWidget {
           ),
           SizedBox(height: block * 1.2),
           Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              InvoiceTitle(title: 'ADDRESS', isRequired: true),
+              SizedBox(width: block),
+              Flexible(
+                child: CustomerTextField(
+                  controller: controller.addressController,
+                  inputType: TextInputType.text,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: block * 1.2),
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex: 4,
+                flex: 1,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InvoiceTitle(title: 'ADDRESS', isRequired: false),
-                    SizedBox(width: block),
-                    Flexible(
-                      child: CustomerTextField(
-                        controller: controller.addressController,
-                        inputType: TextInputType.text,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: block),
-              Expanded(
-                flex: 3,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InvoiceTitle(title: 'PHONE NO', isRequired: false),
+                    InvoiceTitle(title: 'PHONE NO', isRequired: true),
                     SizedBox(width: block),
                     Flexible(
                       child: CustomerTextField(
@@ -121,20 +118,14 @@ class CustomerSection extends StatelessWidget {
                   ],
                 ),
               ),
-            ],
-          ),
-          SizedBox(height: block * 1.2),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
+              SizedBox(width: block),
               Expanded(
-                flex: 4,
+                flex: 1,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    InvoiceTitle(title: 'EMAIL', isRequired: false),
+                    InvoiceTitle(title: 'EMAIL', isRequired: true),
                     SizedBox(width: block),
                     Flexible(
                       child: CustomerTextField(
@@ -145,8 +136,7 @@ class CustomerSection extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(width: block),
-              Expanded(
+              /*Expanded(
                 flex: 3,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,9 +152,8 @@ class CustomerSection extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
-              SizedBox(width: block),
-              Expanded(
+              ),*/
+              /*Expanded(
                 flex: 3,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -180,7 +169,7 @@ class CustomerSection extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              ),*/
             ],
           ),
         ],

@@ -27,15 +27,16 @@ class _InvoiceScreenState extends State<InvoiceScreen> {
   InvoiceController value = InvoiceController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() {
     controller = Provider.of<InvoiceController>(context, listen: false);
     value = Provider.of<InvoiceController>(context);
     super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    controller.disposeController();
+    super.dispose();
   }
 
   @override

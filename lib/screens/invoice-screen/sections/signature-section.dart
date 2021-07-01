@@ -1,13 +1,17 @@
+import 'package:colonial_invoice/common/components/text-field-materials.dart';
+import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class SignatureSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var width = SizeConfig.screenWidth;
     var block = SizeConfig.block;
+    InvoiceController controller = Provider.of<InvoiceController>(context);
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,12 +36,53 @@ class SignatureSection extends StatelessWidget {
                     Expanded(
                       flex: 7,
                       child: Container(
-                        height: block * 8,
+                        height: block * 14,
                         color: Color(0xFFF2F2F3),
                         padding: EdgeInsets.all(block),
-                        child: Text(
-                          'Customer Signature',
-                          style: TextStyle(fontSize: block * 2.5, fontWeight: FontWeight.w900),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Customer Signature',
+                              style: TextStyle(fontSize: block * 2.5, fontWeight: FontWeight.w900),
+                            ),
+                            SizedBox(height: block),
+                            TextFormField(
+                              controller: controller.signingName,
+                              enabled: true,
+                              minLines: 1,
+                              maxLines: 1,
+                              readOnly: false,
+                              showCursor: true,
+                              keyboardType: TextInputType.text,
+                              cursorColor: Colors.black,
+                              cursorHeight: block * 3,
+                              style: textStyle(),
+                              onEditingComplete: () => FocusScope.of(context).unfocus(),
+                              decoration: InputDecoration(
+                                enabled: true,
+                                isDense: true,
+                                filled: true,
+                                fillColor: Colors.transparent,
+                                contentPadding: EdgeInsets.all(block / 1.5),
+                                /*border: withOutBorder(),
+                                disabledBorder: withOutBorder(),
+                                enabledBorder: withOutBorder(),
+                                errorBorder: withOutBorder(),
+                                focusedBorder: withOutBorder(),
+                                focusedErrorBorder: withOutBorder(),*/
+                              ),
+                              onSaved: (text) => controller.signingName.text = text,
+                            ),
+                            /*TableRowInput(
+                              readOnly: false,
+                              controller: controller.signingName,
+                              color: Color(0xFFE6E6E8),
+                              inputType: TextInputType.number,
+                              onChanged: (val) => controller.countSmogServiceFee(),
+                            ),*/
+                          ],
                         ),
                       ),
                     ),
@@ -45,12 +90,31 @@ class SignatureSection extends StatelessWidget {
                     Expanded(
                       flex: 3,
                       child: Container(
-                        height: block * 8,
+                        height: block * 14,
                         color: Color(0xFFF2F2F3),
                         padding: EdgeInsets.all(block),
-                        child: Text(
-                          'Date Service',
-                          style: TextStyle(fontSize: block * 2.5, fontWeight: FontWeight.w900),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(
+                              'Date Service',
+                              style: TextStyle(fontSize: block * 2.5, fontWeight: FontWeight.w900),
+                            ),
+                            Center(
+                              child: InkWell(
+                                onTap: () => controller.selectSigningDate(context: context),
+                                child: Text(
+                                  controller.signingDate == 'null' ? 'Signing Date' : controller.signingDate,
+                                  style: TextStyle(
+                                      fontSize: block * 2,
+                                      fontWeight: FontWeight.w500,
+                                      color: controller.signingDate == 'null' ? Colors.red : Colors.black,
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

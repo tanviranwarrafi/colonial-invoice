@@ -56,6 +56,8 @@ class RegistrationFees extends StatelessWidget {
                       readOnly: false,
                       controller: controller.registrationServiceFeeController,
                       color: Color(0xFFE6E6E8),
+                      inputType: TextInputType.number,
+                      onChanged: (val) => controller.countRegistrationFees(),
                     )
                   ],
                 ),
@@ -65,6 +67,8 @@ class RegistrationFees extends StatelessWidget {
                     readOnly: false,
                     controller: controller.vinVerificationController,
                     color: Color(0xFFE6E6E8),
+                    inputType: TextInputType.number,
+                    onChanged: (val) => controller.countRegistrationFees(),
                   ),
                 ]),
                 TableRow(children: [
@@ -78,6 +82,8 @@ class RegistrationFees extends StatelessWidget {
                     controller: controller.dayPermitController,
                     color: Color(0xFFE6E6E8),
                     height: block * 5,
+                    inputType: TextInputType.number,
+                    onChanged: (val) => controller.countRegistrationFees(),
                   )
                 ]),
                 TableRow(children: [
@@ -90,7 +96,7 @@ class RegistrationFees extends StatelessWidget {
                     height: block * 5,
                   ),
                   TableRowInput(
-                    readOnly: false,
+                    readOnly: true,
                     controller: controller.totalRegistrationFeeController,
                     color: Color(0xFFF8DDDC),
                     height: block * 5,

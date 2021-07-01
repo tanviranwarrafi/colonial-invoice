@@ -32,7 +32,6 @@ textFieldDecoration({String hint}) {
     enabled: true,
     hoverColor: Colors.black,
     isDense: true,
-
     // contentPadding: EdgeInsets.only(left: block * 2, right: block * 2, bottom: block * 2.5, top: block * 2.5),
     // border: InputBorder.none,
     hintText: hint,

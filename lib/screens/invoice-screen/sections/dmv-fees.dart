@@ -56,6 +56,8 @@ class DMVFees extends StatelessWidget {
                       readOnly: false,
                       controller: controller.registrationFeeController,
                       color: Color(0xFFE6E6E8),
+                      inputType: TextInputType.number,
+                      onChanged: (val) => controller.countDmvFees(),
                     ),
                   ],
                 ),
@@ -65,6 +67,8 @@ class DMVFees extends StatelessWidget {
                     readOnly: false,
                     controller: controller.taxesController,
                     color: Color(0xFFE6E6E8),
+                    inputType: TextInputType.number,
+                    onChanged: (val) => controller.countDmvFees(),
                   )
                 ]),
                 TableRow(children: [
@@ -78,6 +82,8 @@ class DMVFees extends StatelessWidget {
                     controller: controller.epfController,
                     color: Color(0xFFE6E6E8),
                     height: block * 5,
+                    inputType: TextInputType.number,
+                    onChanged: (val) => controller.countDmvFees(),
                   )
                 ]),
                 TableRow(children: [
@@ -90,7 +96,7 @@ class DMVFees extends StatelessWidget {
                     height: block * 5,
                   ),
                   TableRowInput(
-                    readOnly: false,
+                    readOnly: true,
                     controller: controller.totalDmvFeesController,
                     color: Color(0xFFF8DDDC),
                     height: block * 5,

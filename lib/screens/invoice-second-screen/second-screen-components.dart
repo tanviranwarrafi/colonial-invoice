@@ -32,6 +32,17 @@ class QuestionText extends StatelessWidget {
   }
 }
 
+class Star extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var block = SizeConfig.block;
+    return Text(
+      '*',
+      style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 2.7),
+    );
+  }
+}
+
 class CheckOption extends StatelessWidget {
   final String title;
   final String value;

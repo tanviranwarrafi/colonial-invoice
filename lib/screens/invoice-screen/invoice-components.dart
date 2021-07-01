@@ -157,8 +157,9 @@ class TableRowInput extends StatelessWidget {
   final bool readOnly;
   final double height;
   final Color color;
+  final Function onChanged;
 
-  TableRowInput({this.controller, this.inputType, this.readOnly, this.height, this.color});
+  TableRowInput({this.controller, this.inputType, this.readOnly, this.height, this.color, this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +176,7 @@ class TableRowInput extends StatelessWidget {
           maxLines: 1,
           readOnly: readOnly == null ? false : readOnly,
           showCursor: readOnly == null || !readOnly ? true : false,
-          keyboardType: TextInputType.text,
+          keyboardType: inputType == null ? TextInputType.text : inputType,
           cursorColor: Colors.black,
           cursorHeight: block * 3,
           style: textStyle(),
@@ -193,8 +194,8 @@ class TableRowInput extends StatelessWidget {
             focusedBorder: withOutBorder(),
             focusedErrorBorder: withOutBorder(),
           ),
-          // validator: (text) => validators.validateName(value: text),
           onSaved: (text) => controller.text = text,
+          onChanged: onChanged,
         ),
       ),
     );

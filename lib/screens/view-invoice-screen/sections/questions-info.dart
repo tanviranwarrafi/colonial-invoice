@@ -43,7 +43,7 @@ class QuestionsInfo extends StatelessWidget {
           children: [
             QuestionTitle(title: '5.   Is your vehicle finamced, leased?'),
             SizedBox(width: block * 2),
-            CheckOption(value: controller.isRegistrationCard, staticValue: controller.isRegistrationCard),
+            CheckOption(value: controller.isFinanced, staticValue: controller.isFinanced),
           ],
         ),
         SizedBox(height: block),

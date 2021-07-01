@@ -13,7 +13,7 @@ class VehicleSection extends StatelessWidget {
     var block = SizeConfig.block;
     InvoiceController controller = Provider.of<InvoiceController>(context);
     return Container(
-      height: block * 18,
+      height: block * 21,
       decoration: BoxDecoration(
         color: Color(0xFFE9E9E7),
         border: Border.all(color: Colors.black, width: 3),
@@ -35,12 +35,12 @@ class VehicleSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 5,
+                        flex: 1,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'VIN #', isRequired: false),
+                            InvoiceTitle(title: 'VIN #', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(
@@ -53,6 +53,23 @@ class VehicleSection extends StatelessWidget {
                       ),
                       SizedBox(width: block),
                       Expanded(
+                        flex: 1,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            InvoiceTitle(title: 'STATE', isRequired: true),
+                            SizedBox(width: block),
+                            Flexible(
+                              child: CustomerTextField(
+                                controller: controller.stateController,
+                                inputType: TextInputType.text,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      /*Expanded(
                         flex: 3,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,7 +103,7 @@ class VehicleSection extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
+                      ),*/
                     ],
                   ),
                   SizedBox(height: block * 1.2),
@@ -95,12 +112,12 @@ class VehicleSection extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 3,
+                        flex: 1,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'LICENCE PLATE', isRequired: false),
+                            InvoiceTitle(title: 'LICENCE PLATE', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(
@@ -113,30 +130,12 @@ class VehicleSection extends StatelessWidget {
                       ),
                       SizedBox(width: block),
                       Expanded(
-                        flex: 3,
+                        flex: 1,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'STATE', isRequired: false),
-                            SizedBox(width: block),
-                            Flexible(
-                              child: CustomerTextField(
-                                controller: controller.stateController,
-                                inputType: TextInputType.text,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: block),
-                      Expanded(
-                        flex: 3,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            InvoiceTitle(title: 'EXPIRATION', isRequired: false),
+                            InvoiceTitle(title: 'EXPIRATION', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(
@@ -154,7 +153,7 @@ class VehicleSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Expanded(
+                      /*Expanded(
                         flex: 3,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -171,14 +170,14 @@ class VehicleSection extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SizedBox(width: block),
+                      SizedBox(width: block),*/
                       Expanded(
                         flex: 2,
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'YEAR', isRequired: false),
+                            InvoiceTitle(title: 'YEAR', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(
@@ -196,7 +195,7 @@ class VehicleSection extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'MAKE', isRequired: false),
+                            InvoiceTitle(title: 'MAKE', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(
@@ -214,7 +213,7 @@ class VehicleSection extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            InvoiceTitle(title: 'MODEL', isRequired: false),
+                            InvoiceTitle(title: 'MODEL', isRequired: true),
                             SizedBox(width: block),
                             Flexible(
                               child: CustomerTextField(

@@ -25,7 +25,7 @@ class InvoiceTitle extends StatelessWidget {
           ),
         ),
         isRequired
-            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 4))
+            ? Text('*', style: TextStyle(color: Colors.red, fontWeight: FontWeight.w800, fontSize: block * 2))
             : SizedBox.shrink(),
       ],
     );

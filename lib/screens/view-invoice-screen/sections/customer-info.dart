@@ -52,44 +52,35 @@ class CustomerInfo extends StatelessWidget {
             ],
           ),
           SizedBox(height: block * 1.2),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 4,
-                child: InvoiceTitle(
-                    title: controller.addressController.text == null
-                        ? 'ADDRESS: No ADDRESS Found'
-                        : 'ADDRESS: ${controller.addressController.text}',
-                    isRequired: false),
-              ),
-              SizedBox(width: block),
-              Expanded(
-                flex: 3,
-                child: InvoiceTitle(
-                    title: controller.phoneController.text == null
-                        ? 'PHONE NO: No PHONE NO Found'
-                        : 'PHONE NO: ${controller.phoneController.text}',
-                    isRequired: false),
-              ),
-            ],
-          ),
+          InvoiceTitle(
+              title: controller.addressController.text == null
+                  ? 'ADDRESS: No ADDRESS Found'
+                  : 'ADDRESS: ${controller.addressController.text}',
+              isRequired: false),
           SizedBox(height: block * 1.2),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex: 4,
+                flex: 1,
+                child: InvoiceTitle(
+                    title: controller.phoneController.text == null
+                        ? 'PHONE NO: No PHONE NO Found'
+                        : 'PHONE NO: ${controller.phoneController.text}',
+                    isRequired: false),
+              ),
+              SizedBox(width: block),
+              Expanded(
+                flex: 1,
                 child: InvoiceTitle(
                     title: controller.emailController.text == null
                         ? 'EMAIL: No EMAIL Found'
                         : 'EMAIL: ${controller.emailController.text}',
                     isRequired: false),
               ),
-              SizedBox(width: block),
-              Expanded(
+
+              /*Expanded(
                 flex: 3,
                 child: InvoiceTitle(
                     title: controller.paidAmountController.text == null
@@ -105,7 +96,7 @@ class CustomerInfo extends StatelessWidget {
                         ? 'BALANCE: Not Found'
                         : 'BALANCE: ${controller.balanceController.text}',
                     isRequired: false),
-              ),
+              ),*/
             ],
           ),
         ],
