@@ -53,12 +53,20 @@ class DMVFeesInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'RGISTRATION FEE', background: Color(0xFFF2F2F3)),
-                    TitleText(title: '${controller.registrationFeeController.text}', color: Color(0xFFF2F2F3)),
+                    TitleText(
+                      title: controller.registrationFeeController.text.length > 0
+                          ? '\$${controller.registrationFeeController.text}'
+                          : '\$0.00',
+                      color: Color(0xFFF2F2F3),
+                    ),
                   ],
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'TAXES', background: Color(0xFFE6E6E8)),
-                  TitleText(title: '${controller.taxesController.text}', color: Color(0xFFE6E6E8)),
+                  TitleText(
+                    title: controller.taxesController.text.length > 0 ? '\$${controller.taxesController.text}' : '\$0.00',
+                    color: Color(0xFFE6E6E8),
+                  ),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -67,7 +75,7 @@ class DMVFeesInfo extends StatelessWidget {
                     height: block * 5,
                   ),
                   TitleText(
-                    title: '${controller.epfController.text}',
+                    title: controller.epfController.text.length > 0 ? '\$${controller.epfController.text}' : '\$0.00',
                     color: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
@@ -82,7 +90,9 @@ class DMVFeesInfo extends StatelessWidget {
                     height: block * 5,
                   ),
                   TitleText(
-                    title: '${controller.totalDmvFeesController.text}',
+                    title: controller.totalDmvFeesController.text.length > 0
+                        ? '\$${controller.totalDmvFeesController.text}'
+                        : '\$0.00',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
                   ),

@@ -1,9 +1,11 @@
-import 'package:colonial_invoice/common/components/text-field-materials.dart';
+import 'dart:typed_data';
+
 import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/utils/images.dart';
 import 'package:colonial_invoice/utils/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:hand_signature/signature.dart';
 import 'package:provider/provider.dart';
 
 class SignatureSection extends StatelessWidget {
@@ -48,40 +50,93 @@ class SignatureSection extends StatelessWidget {
                               style: TextStyle(fontSize: block * 2.5, fontWeight: FontWeight.w900),
                             ),
                             SizedBox(height: block),
-                            TextFormField(
-                              controller: controller.signingName,
-                              enabled: true,
-                              minLines: 1,
-                              maxLines: 1,
-                              readOnly: false,
-                              showCursor: true,
-                              keyboardType: TextInputType.text,
-                              cursorColor: Colors.black,
-                              cursorHeight: block * 3,
-                              style: textStyle(),
-                              onEditingComplete: () => FocusScope.of(context).unfocus(),
-                              decoration: InputDecoration(
-                                enabled: true,
-                                isDense: true,
-                                filled: true,
-                                fillColor: Colors.transparent,
-                                contentPadding: EdgeInsets.all(block / 1.5),
-                                /*border: withOutBorder(),
-                                disabledBorder: withOutBorder(),
-                                enabledBorder: withOutBorder(),
-                                errorBorder: withOutBorder(),
-                                focusedBorder: withOutBorder(),
-                                focusedErrorBorder: withOutBorder(),*/
+                            Expanded(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Flexible(
+                                    child: controller.isEdit
+                                        ? Stack(
+                                            children: <Widget>[
+                                              Container(
+                                                constraints: BoxConstraints.expand(),
+                                                color: Colors.white,
+                                                child: HandSignaturePainterView(
+                                                  control: controller.control,
+                                                  type: SignatureDrawType.shape,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                              CustomPaint(
+                                                painter: DebugSignaturePainterCP(
+                                                  control: controller.control,
+                                                  cp: false,
+                                                  cpStart: false,
+                                                  cpEnd: false,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        : Container(
+                                            constraints: BoxConstraints.expand(),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(color: Colors.black, width: 2),
+                                              color: Colors.transparent,
+                                            ),
+                                            child: ValueListenableBuilder<ByteData>(
+                                              valueListenable: controller.rawImage,
+                                              builder: (context, data, child) {
+                                                return Padding(
+                                                  padding: EdgeInsets.all(block),
+                                                  child: Image.memory(data.buffer.asUint8List(), color: Colors.black),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                  ),
+                                  SizedBox(width: block),
+                                  Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      controller.isEdit
+                                          ? SizedBox.shrink()
+                                          : InkWell(
+                                              onTap: () => controller.editSignOnTap(),
+                                              child: CircleAvatar(
+                                                radius: block * 1.5,
+                                                backgroundColor: Colors.amber,
+                                                child: Icon(Icons.edit, color: Colors.white),
+                                              ),
+                                            ),
+                                      controller.isEdit ? SizedBox.shrink() : SizedBox(height: block / 2),
+                                      controller.isEdit
+                                          ? InkWell(
+                                              onTap: () => controller.clearSignOnTap(),
+                                              child: CircleAvatar(
+                                                radius: block * 1.5,
+                                                backgroundColor: Colors.red,
+                                                child: Icon(Icons.clear, color: Colors.white),
+                                              ),
+                                            )
+                                          : SizedBox.shrink(),
+                                      controller.isEdit ? SizedBox(height: block / 2) : SizedBox.shrink(),
+                                      controller.isEdit
+                                          ? InkWell(
+                                              onTap: () => controller.exportSignOnTap(context: context),
+                                              child: CircleAvatar(
+                                                radius: block * 1.5,
+                                                backgroundColor: Colors.green,
+                                                child: Icon(Icons.check, color: Colors.white),
+                                              ),
+                                            )
+                                          : SizedBox.shrink(),
+                                    ],
+                                  ),
+                                ],
                               ),
-                              onSaved: (text) => controller.signingName.text = text,
                             ),
-                            /*TableRowInput(
-                              readOnly: false,
-                              controller: controller.signingName,
-                              color: Color(0xFFE6E6E8),
-                              inputType: TextInputType.number,
-                              onChanged: (val) => controller.countSmogServiceFee(),
-                            ),*/
                           ],
                         ),
                       ),

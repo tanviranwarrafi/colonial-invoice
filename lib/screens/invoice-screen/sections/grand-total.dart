@@ -59,10 +59,7 @@ class GrandTotal extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(
-                'GRAND TOTAL',
-                style: TextStyle(fontSize: block * 2.8, color: Colors.black),
-              ),
+              Text('GRAND TOTAL', style: TextStyle(fontSize: block * 2.8, color: Colors.black)),
               SizedBox(width: block * 3),
               Container(
                 width: block * 20,
@@ -80,23 +77,6 @@ class GrandTotal extends StatelessWidget {
                   height: block * 4,
                 ),
               )
-              /*Container(
-                              padding: EdgeInsets.all(block),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border(
-                                  top: BorderSide(color: Colors.black, width: 3),
-                                  left: BorderSide(color: Colors.black, width: 3),
-                                  bottom: BorderSide(color: Colors.black, width: 3),
-                                ),
-                              ),
-                              child: TableRowInput(
-                                readOnly: true,
-                                controller: controller.grandTotalController,
-                                color: Color(0xFFF5B2B1),
-                                height: block * 5,
-                              ),
-                            )*/
             ],
           ),
         ],

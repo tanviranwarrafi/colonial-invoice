@@ -26,8 +26,8 @@ class CustomerInfo extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: InvoiceTitle(
-                    title: controller.nameController.text == null
-                        ? 'CUSTOMER NAME: No Name Found'
+                    title: controller.nameController.text.length < 1
+                        ? 'CUSTOMER NAME: No Name Inserted'
                         : 'CUSTOMER NAME: ${controller.nameController.text}',
                     isRequired: false),
               ),
@@ -35,8 +35,8 @@ class CustomerInfo extends StatelessWidget {
               Expanded(
                 flex: 3,
                 child: InvoiceTitle(
-                    title: controller.driverLicController.text == null
-                        ? 'DRIVER LIC: No DRIVER LIC Found'
+                    title: controller.driverLicController.text.length < 1
+                        ? 'DRIVER LIC: No LIC Found'
                         : 'DRIVER LIC: ${controller.driverLicController.text}',
                     isRequired: false),
               ),
@@ -44,7 +44,7 @@ class CustomerInfo extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: InvoiceTitle(
-                    title: controller.dateController.text == null
+                    title: controller.dateController.text.length < 1
                         ? 'DATE: No Date Found'
                         : 'DATE: ${controller.dateController.text}',
                     isRequired: false),
@@ -53,8 +53,8 @@ class CustomerInfo extends StatelessWidget {
           ),
           SizedBox(height: block * 1.2),
           InvoiceTitle(
-              title: controller.addressController.text == null
-                  ? 'ADDRESS: No ADDRESS Found'
+              title: controller.addressController.text.length < 1
+                  ? 'ADDRESS: No Address Inserted'
                   : 'ADDRESS: ${controller.addressController.text}',
               isRequired: false),
           SizedBox(height: block * 1.2),
@@ -65,8 +65,8 @@ class CustomerInfo extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: InvoiceTitle(
-                    title: controller.phoneController.text == null
-                        ? 'PHONE NO: No PHONE NO Found'
+                    title: controller.phoneController.text.length < 1
+                        ? 'PHONE NO: No Phone Number Inserted'
                         : 'PHONE NO: ${controller.phoneController.text}',
                     isRequired: false),
               ),
@@ -74,29 +74,11 @@ class CustomerInfo extends StatelessWidget {
               Expanded(
                 flex: 1,
                 child: InvoiceTitle(
-                    title: controller.emailController.text == null
-                        ? 'EMAIL: No EMAIL Found'
+                    title: controller.emailController.text.length < 1
+                        ? 'EMAIL: No Email Inserted'
                         : 'EMAIL: ${controller.emailController.text}',
                     isRequired: false),
               ),
-
-              /*Expanded(
-                flex: 3,
-                child: InvoiceTitle(
-                    title: controller.paidAmountController.text == null
-                        ? 'AMOUNT PAID: Not Found'
-                        : 'AMOUNT PAID: ${controller.paidAmountController.text}',
-                    isRequired: false),
-              ),
-              SizedBox(width: block),
-              Expanded(
-                flex: 3,
-                child: InvoiceTitle(
-                    title: controller.balanceController.text == null
-                        ? 'BALANCE: Not Found'
-                        : 'BALANCE: ${controller.balanceController.text}',
-                    isRequired: false),
-              ),*/
             ],
           ),
         ],

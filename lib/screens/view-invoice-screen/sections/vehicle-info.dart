@@ -36,8 +36,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: InvoiceTitle(
-                            title: controller.vinController.text == null
-                                ? 'VIN #: Not Found'
+                            title: controller.vinController.text.length < 1
+                                ? 'VIN #: Not Inserted'
                                 : 'VIN #: ${controller.vinController.text}',
                             isRequired: false),
                       ),
@@ -45,28 +45,11 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 1,
                         child: InvoiceTitle(
-                            title: controller.stateController.text == null
-                                ? 'STATE: Not Found'
+                            title: controller.stateController.text.length < 1
+                                ? 'STATE: Not Inserted'
                                 : 'STATE: ${controller.stateController.text}',
                             isRequired: false),
                       ),
-                      /* Expanded(
-                        flex: 3,
-                        child: InvoiceTitle(
-                            title: controller.cashController.text == null
-                                ? 'CASH: Not Found'
-                                : 'CASH: ${controller.cashController.text}',
-                            isRequired: false),
-                      ),
-                      SizedBox(width: block),
-                      Expanded(
-                        flex: 3,
-                        child: InvoiceTitle(
-                            title: controller.cardController.text == null
-                                ? 'CARD: Not Found'
-                                : 'CARD: ${controller.cardController.text}',
-                            isRequired: false),
-                      ),*/
                     ],
                   ),
                   SizedBox(height: block * 1.2),
@@ -77,8 +60,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.licencePlateController.text == null
-                                ? 'LICENCE PLATE: Not Found'
+                            title: controller.licencePlateController.text.length < 1
+                                ? 'LICENCE PLATE: Not Inserted'
                                 : 'LICENCE PLATE: ${controller.licencePlateController.text}',
                             isRequired: false),
                       ),
@@ -86,8 +69,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 3,
                         child: InvoiceTitle(
-                            title: controller.expirationController.text == null
-                                ? 'EXPIRATION: Not Found'
+                            title: controller.expirationController.text.length < 1
+                                ? 'EXPIRATION: Not Inserted'
                                 : 'EXPIRATION: ${controller.expirationController.text}',
                             isRequired: false),
                       ),
@@ -98,20 +81,11 @@ class VehicleInfo extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      /*Expanded(
-                        flex: 3,
-                        child: InvoiceTitle(
-                            title: controller.odometerController.text == null
-                                ? 'ODOMETER: Not Found'
-                                : 'ODOMETER: ${controller.odometerController.text}',
-                            isRequired: false),
-                      ),
-                      SizedBox(width: block),*/
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.yearController.text == null
-                                ? 'YEAR: Not Found'
+                            title: controller.yearController.text.length < 1
+                                ? 'YEAR: Not Inserted'
                                 : 'YEAR: ${controller.yearController.text}',
                             isRequired: false),
                       ),
@@ -119,8 +93,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.makeController.text == null
-                                ? 'MAKE: Not Found'
+                            title: controller.makeController.text.length < 1
+                                ? 'MAKE: Not Inserted'
                                 : 'MAKE: ${controller.makeController.text}',
                             isRequired: false),
                       ),
@@ -128,8 +102,8 @@ class VehicleInfo extends StatelessWidget {
                       Expanded(
                         flex: 2,
                         child: InvoiceTitle(
-                            title: controller.modelController.text == null
-                                ? 'MODEL: Not Found'
+                            title: controller.modelController.text.length < 1
+                                ? 'MODEL: Not Inserted'
                                 : 'MODEL: ${controller.modelController.text}',
                             isRequired: false),
                       ),

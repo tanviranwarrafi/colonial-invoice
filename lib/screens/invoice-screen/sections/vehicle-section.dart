@@ -69,41 +69,6 @@ class VehicleSection extends StatelessWidget {
                           ],
                         ),
                       ),
-                      /*Expanded(
-                        flex: 3,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            InvoiceTitle(title: 'CASH', isRequired: false),
-                            SizedBox(width: block),
-                            Flexible(
-                              child: CustomerTextField(
-                                controller: controller.cashController,
-                                inputType: TextInputType.number,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: block),
-                      Expanded(
-                        flex: 3,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            InvoiceTitle(title: 'CARD', isRequired: false),
-                            SizedBox(width: block),
-                            Flexible(
-                              child: CustomerTextField(
-                                controller: controller.cardController,
-                                inputType: TextInputType.text,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),*/
                     ],
                   ),
                   SizedBox(height: block * 1.2),
@@ -153,24 +118,6 @@ class VehicleSection extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      /*Expanded(
-                        flex: 3,
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            InvoiceTitle(title: 'ODOMETER', isRequired: false),
-                            SizedBox(width: block),
-                            Flexible(
-                              child: CustomerTextField(
-                                controller: controller.odometerController,
-                                inputType: TextInputType.text,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(width: block),*/
                       Expanded(
                         flex: 2,
                         child: Row(

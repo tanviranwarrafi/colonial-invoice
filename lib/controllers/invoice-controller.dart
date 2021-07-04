@@ -1,4 +1,6 @@
+import 'dart:convert' as convert;
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:colonial_invoice/common/api-urls.dart';
 import 'package:colonial_invoice/screens/invoice-second-screen/invoice-second-screen.dart';
@@ -8,6 +10,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:hand_signature/signature.dart';
 import 'package:http/http.dart' as http;
 import 'package:simple_moment/simple_moment.dart';
 
@@ -20,22 +23,16 @@ class InvoiceController with ChangeNotifier {
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController emailController = TextEditingController();
-//  TextEditingController paidAmountController = TextEditingController();
-//  TextEditingController balanceController = TextEditingController();
 
   TextEditingController vinController = TextEditingController();
-//  TextEditingController cashController = TextEditingController();
-//  TextEditingController cardController = TextEditingController();
   TextEditingController licencePlateController = TextEditingController();
   TextEditingController stateController = TextEditingController();
   TextEditingController expirationController = TextEditingController();
-//  TextEditingController odometerController = TextEditingController();
   TextEditingController yearController = TextEditingController();
   TextEditingController makeController = TextEditingController();
   TextEditingController modelController = TextEditingController();
 
   TextEditingController smogTestController = TextEditingController(text: '');
-  // TextEditingController pretestController = TextEditingController();
   TextEditingController smogCertificateController = TextEditingController(text: '');
   TextEditingController retestController = TextEditingController(text: '');
   TextEditingController totalSmogServiceFeeController = TextEditingController(text: '');
@@ -43,8 +40,6 @@ class InvoiceController with ChangeNotifier {
   TextEditingController registrationFeeController = TextEditingController(text: '');
   TextEditingController taxesController = TextEditingController(text: '');
   TextEditingController epfController = TextEditingController(text: '');
-
-  // TextEditingController citationsController = TextEditingController();
   TextEditingController totalDmvFeesController = TextEditingController(text: '');
 
   TextEditingController registrationServiceFeeController = TextEditingController(text: '');
@@ -55,8 +50,9 @@ class InvoiceController with ChangeNotifier {
   TextEditingController creditDebitController = TextEditingController();
   TextEditingController grandTotalController = TextEditingController();
 
-  TextEditingController signingName = TextEditingController();
+  bool isEdit = true;
   String signingDate = 'null';
+  ValueNotifier<ByteData> rawImage = ValueNotifier<ByteData>(null);
 
   TextEditingController estimatedValue = TextEditingController();
   TextEditingController bankName = TextEditingController();
@@ -75,22 +71,16 @@ class InvoiceController with ChangeNotifier {
     phoneController.clear();
     addressController.clear();
     emailController.clear();
-//    paidAmountController.clear();
-//    balanceController.clear();
 
     vinController.clear();
-//    cashController.clear();
-//    cardController.clear();
     licencePlateController.clear();
     stateController.clear();
     expirationController.clear();
-//    odometerController.clear();
     yearController.clear();
     makeController.clear();
     modelController.clear();
 
     smogTestController.clear();
-    // pretestController.clear();
     smogCertificateController.clear();
     retestController.clear();
     totalSmogServiceFeeController.clear();
@@ -98,15 +88,29 @@ class InvoiceController with ChangeNotifier {
     registrationFeeController.clear();
     taxesController.clear();
     epfController.clear();
-    // citationsController.clear();
     totalDmvFeesController.clear();
 
     registrationServiceFeeController.clear();
     vinVerificationController.clear();
     dayPermitController.clear();
     totalRegistrationFeeController.clear();
+
     creditDebitController.clear();
     grandTotalController.clear();
+
+    signingDate = 'null';
+
+    estimatedValue.clear();
+    bankName.clear();
+    bankAddress.clear();
+    isRegistrationCard = 'No';
+    lastEnterDate = 'null';
+    buyCarDate = 'null';
+    isFinanced = 'Financed';
+
+    isEdit = true;
+    rawImage.value = null;
+    control.clear();
 
     loader = false;
   }
@@ -152,7 +156,35 @@ class InvoiceController with ChangeNotifier {
     notifyListeners();
   }
 
+  HandSignatureControl control = new HandSignatureControl(
+    threshold: 0.01,
+    smoothRatio: 0.65,
+    velocityRange: 2.0,
+  );
+
+  editSignOnTap() {
+    isEdit = true;
+    notifyListeners();
+  }
+
+  clearSignOnTap() {
+    control.clear();
+    rawImage.value = null;
+    notifyListeners();
+  }
+
+  exportSignOnTap({BuildContext context}) async {
+    if (control.isFilled) {
+      rawImage.value = await control.toImage(color: Colors.black);
+      isEdit = false;
+      notifyListeners();
+    } else {
+      snackbar(context: context, message: 'Please sign here first');
+    }
+  }
+
   validateCustomerInfo(BuildContext context) {
+    FocusScope.of(context).unfocus();
     if (nameController.text.length > 0) {
       if (dateController.text.length > 0) {
         if (driverLicController.text.length > 0) {
@@ -220,15 +252,22 @@ class InvoiceController with ChangeNotifier {
     }
   }
 
-  validateSigningInfo({BuildContext context}) {
-    if (signingName.text.length > 0) {
-      if (signingDate != 'null') {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceSecondScreen()));
+  validateSigningInfo({BuildContext context}) async {
+    if (control.isFilled) {
+      rawImage.value = await control.toImage(color: Colors.black);
+      isEdit = false;
+      notifyListeners();
+      if (rawImage.value != null) {
+        if (signingDate != 'null') {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => InvoiceSecondScreen()));
+        } else {
+          snackbar(context: context, message: 'Please select signing date');
+        }
       } else {
-        snackbar(context: context, message: 'Please sign the the form below');
+        snackbar(context: context, message: 'Please sign the form below');
       }
     } else {
-      snackbar(context: context, message: 'Please select signing date');
+      snackbar(context: context, message: 'Please sign here first');
     }
   }
 
@@ -254,6 +293,7 @@ class InvoiceController with ChangeNotifier {
   }
 
   selectSigningDate({BuildContext context}) {
+    FocusScope.of(context).unfocus();
     DatePicker.showDatePicker(
       context,
       showTitleActions: true,
@@ -270,6 +310,7 @@ class InvoiceController with ChangeNotifier {
   }
 
   selectBuyCarDate({BuildContext context}) {
+    FocusScope.of(context).unfocus();
     DatePicker.showDatePicker(
       context,
       showTitleActions: true,
@@ -291,6 +332,7 @@ class InvoiceController with ChangeNotifier {
   }
 
   viewInvoiceOnTap({BuildContext context}) {
+    FocusScope.of(context).unfocus();
     if (estimatedValue.text.length > 0) {
       if (bankName.text.length > 0) {
         if (bankAddress.text.length > 0) {
@@ -315,8 +357,10 @@ class InvoiceController with ChangeNotifier {
   }
 
   submitInvoiceOnTap({BuildContext context}) async {
+    //http://invoiceapplication.colonialgarage.net/public/download-invoice/1
     loader = true;
     notifyListeners();
+    var signingImage = convert.base64Encode(rawImage.value.buffer.asUint8List());
     Map body = {
       "customer_name": nameController.text.length > 0 ? nameController.text : '',
       "date": dateController.text.length > 0 ? dateController.text : '',
@@ -324,15 +368,10 @@ class InvoiceController with ChangeNotifier {
       "phone_no": phoneController.text,
       "address": addressController.text,
       "email": emailController.text,
-      "amount_paid": '',
-      "balance": '',
       "vin": vinController.text,
-      "cash": '',
-      "card": '',
       "lisence_plate": licencePlateController.text,
       "state": stateController.text,
       "expiration": expirationController.text,
-      "odometer": '',
       "year": yearController.text,
       "make": makeController.text,
       "model": modelController.text,
@@ -346,14 +385,14 @@ class InvoiceController with ChangeNotifier {
       "vin_verification": vinVerificationController.text.length > 0 ? vinVerificationController.text : 0,
       "day_permit": dayPermitController.text.length > 0 ? dayPermitController.text : 0,
       "credit_debit": creditDebitController.text.length > 0 ? creditDebitController.text : 0,
-      "registration_card": isRegistrationCard,
+      "registration_card": isRegistrationCard == 'Yes' ? true : false,
       "last_enter_date": lastEnterDate,
       "estimated_value_of_card": estimatedValue.text,
       "buy_card_date": buyCarDate,
       "vehicle_financed": isFinanced,
       "bank_name": bankName.text,
       "bank_address": bankAddress.text,
-      "customer_signature": signingName.text,
+      "customer_signature": 'data:image/png;base64, ' + signingImage,
       "date_service": signingDate
     };
     print(body);

@@ -110,7 +110,6 @@ class QuestionInput extends StatelessWidget {
         focusedBorder: outlineBorder(color: Colors.black, width: 2),
         focusedErrorBorder: outlineBorder(color: Colors.black, width: 2),
       ),
-      // validator: (text) => validators.validateName(value: text),
       onSaved: (text) => controller.text = text,
     );
   }
@@ -145,7 +144,7 @@ class SelectDate extends StatelessWidget {
   }
 }
 
-class DateInput extends StatelessWidget {
+/*class DateInput extends StatelessWidget {
   final TextEditingController controller;
 
   DateInput({this.controller});
@@ -179,8 +178,7 @@ class DateInput extends StatelessWidget {
         focusedBorder: outlineBorder(color: Colors.black, width: 2),
         focusedErrorBorder: outlineBorder(color: Colors.black, width: 2),
       ),
-      // validator: (text) => validators.validateName(value: text),
       onSaved: (text) => controller.text = text,
     );
   }
-}
+}*/

@@ -6,8 +6,10 @@ import 'package:colonial_invoice/controllers/invoice-controller.dart';
 import 'package:colonial_invoice/screens/invoice-screen/invoice-components.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/customer-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/dmv-fees-info.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/sections/grand-total-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/questions-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/registration-fees-info.dart';
+import 'package:colonial_invoice/screens/view-invoice-screen/sections/signing-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/smog-service-info.dart';
 import 'package:colonial_invoice/screens/view-invoice-screen/sections/vehicle-info.dart';
 import 'package:colonial_invoice/utils/images.dart';
@@ -103,6 +105,8 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
                           RegistrationFeesInfo(),
                         ],
                       ),
+                      SizedBox(height: block * 1.5),
+                      GrandTotalInfo(),
                       SizedBox(height: block * 3),
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,6 +123,22 @@ class _ViewInvoiceScreenState extends State<ViewInvoiceScreen> {
                       ),
                       SizedBox(height: block * 1.5),
                       QuestionsInfo(),
+                      SizedBox(height: block * 3),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.live_help, color: Colors.red, size: block * 4.5),
+                          SizedBox(width: block),
+                          Text(
+                            'Signing Info',
+                            textAlign: TextAlign.start,
+                            style: TextStyle(fontSize: block * 2.8, color: Colors.black),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: block * 1.5),
+                      SigningInfo(),
                     ],
                   ),
                 ),

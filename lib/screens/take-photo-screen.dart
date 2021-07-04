@@ -113,7 +113,6 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
                                     focusedBorder: outlineBorder(color: Colors.black, radius: block / 2, width: 1.5),
                                     focusedErrorBorder: outlineBorder(color: Colors.black, radius: block / 2, width: 1.5),
                                   ),
-                                  // validator: (text) => validators.validateName(value: text),
                                   onSaved: (text) => controller.email.text = text,
                                 ),
                               ),

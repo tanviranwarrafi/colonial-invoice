@@ -53,17 +53,27 @@ class RegistrationFeesInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'REGISTRATION SERVICE FEE', background: Color(0xFFF2F2F3)),
-                    TitleText(title: '${controller.registrationServiceFeeController.text}', color: Color(0xFFF2F2F3)),
+                    TitleText(
+                      title: controller.registrationServiceFeeController.text.length > 0
+                          ? '\$${controller.registrationServiceFeeController.text}'
+                          : '\$0.00',
+                      color: Color(0xFFF2F2F3),
+                    ),
                   ],
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'VIN VERIFICATION', background: Color(0xFFE6E6E8)),
-                  TitleText(title: '${controller.vinVerificationController.text}', color: Color(0xFFE6E6E8)),
+                  TitleText(
+                    title: controller.vinVerificationController.text.length > 0
+                        ? '\$${controller.vinVerificationController.text}'
+                        : '\$0.00',
+                    color: Color(0xFFE6E6E8),
+                  ),
                 ]),
                 TableRow(children: [
                   TableRowTitle(title: 'DAY PERMIT', background: Color(0xFFF2F2F3), height: block * 5),
                   TitleText(
-                    title: '${controller.dayPermitController.text}',
+                    title: controller.dayPermitController.text.length > 0 ? '\$${controller.dayPermitController.text}' : '\$0.00',
                     color: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
@@ -78,7 +88,9 @@ class RegistrationFeesInfo extends StatelessWidget {
                     height: block * 5,
                   ),
                   TitleText(
-                    title: '${controller.totalRegistrationFeeController.text}',
+                    title: controller.totalRegistrationFeeController.text.length > 0
+                        ? '\$${controller.totalRegistrationFeeController.text}'
+                        : '\$0.00',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
                   ),

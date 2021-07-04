@@ -19,6 +19,7 @@ class TakePhotoController with ChangeNotifier {
   bool loader = false;
 
   disposeController() {
+    email.clear();
     selectedImage = null;
     loader = false;
   }

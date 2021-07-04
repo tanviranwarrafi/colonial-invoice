@@ -53,12 +53,20 @@ class SmogServiceInfo extends StatelessWidget {
                   decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey, width: 3))),
                   children: [
                     TableRowTitle(title: 'SMOG TEST', background: Color(0xFFF2F2F3)),
-                    TitleText(title: '${controller.smogTestController.text}', color: Color(0xFFF2F2F3)),
+                    TitleText(
+                      title: controller.smogTestController.text.length > 0 ? '\$${controller.smogTestController.text}' : '\$0.00',
+                      color: Color(0xFFF2F2F3),
+                    ),
                   ],
                 ),
                 TableRow(children: [
                   TableRowTitle(title: 'SMOG CERTIGFICATE', background: Color(0xFFE6E6E8)),
-                  TitleText(title: '${controller.smogCertificateController.text}', color: Color(0xFFE6E6E8)),
+                  TitleText(
+                    title: controller.smogCertificateController.text.length > 0
+                        ? '\$${controller.smogCertificateController.text}'
+                        : '\$0.00',
+                    color: Color(0xFFE6E6E8),
+                  ),
                 ]),
                 TableRow(children: [
                   TableRowTitle(
@@ -67,7 +75,7 @@ class SmogServiceInfo extends StatelessWidget {
                     height: block * 5,
                   ),
                   TitleText(
-                    title: '${controller.retestController.text}',
+                    title: controller.retestController.text.length > 0 ? '\$${controller.retestController.text}' : '\$0.00',
                     color: Color(0xFFF2F2F3),
                     height: block * 5,
                   ),
@@ -83,7 +91,9 @@ class SmogServiceInfo extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   TitleText(
-                    title: '${controller.totalSmogServiceFeeController.text}',
+                    title: controller.totalSmogServiceFeeController.text.length > 0
+                        ? '\$${controller.totalSmogServiceFeeController.text}'
+                        : '\$0.00',
                     color: Color(0xFFF8DDDC),
                     height: block * 5,
                   ),

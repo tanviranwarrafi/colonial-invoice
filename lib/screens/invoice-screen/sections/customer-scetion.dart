@@ -136,40 +136,6 @@ class CustomerSection extends StatelessWidget {
                   ],
                 ),
               ),
-              /*Expanded(
-                flex: 3,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InvoiceTitle(title: 'AMOUNT PAID', isRequired: false),
-                    SizedBox(width: block),
-                    Flexible(
-                      child: CustomerTextField(
-                        controller: controller.paidAmountController,
-                        inputType: TextInputType.number,
-                      ),
-                    ),
-                  ],
-                ),
-              ),*/
-              /*Expanded(
-                flex: 3,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InvoiceTitle(title: 'BALANCE', isRequired: false),
-                    SizedBox(width: block),
-                    Flexible(
-                      child: CustomerTextField(
-                        controller: controller.balanceController,
-                        inputType: TextInputType.number,
-                      ),
-                    ),
-                  ],
-                ),
-              ),*/
             ],
           ),
         ],
