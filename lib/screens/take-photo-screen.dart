@@ -18,16 +18,18 @@ class _TakePhotoScreenState extends State<TakePhotoScreen> {
   TakePhotoController value = TakePhotoController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() {
     controller = Provider.of<TakePhotoController>(context, listen: false);
     value = Provider.of<TakePhotoController>(context);
     super.didChangeDependencies();
   }
+
+  @override
+  void dispose() {
+    controller.disposeController();
+    super.dispose();
+  }
+
 
   @override
   Widget build(BuildContext context) {
