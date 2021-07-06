@@ -18,7 +18,6 @@ class InvoiceController with ChangeNotifier {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiService apiService = ApiService();
   TextEditingController nameController = TextEditingController();
-  TextEditingController dateController = TextEditingController();
   TextEditingController driverLicController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController addressController = TextEditingController();
@@ -66,7 +65,6 @@ class InvoiceController with ChangeNotifier {
 
   disposeController() {
     nameController.clear();
-    dateController.clear();
     driverLicController.clear();
     phoneController.clear();
     addressController.clear();
@@ -98,7 +96,10 @@ class InvoiceController with ChangeNotifier {
     creditDebitController.clear();
     grandTotalController.clear();
 
+    isEdit = true;
     signingDate = 'null';
+    rawImage.value = null;
+    control.clear();
 
     estimatedValue.clear();
     bankName.clear();
@@ -107,10 +108,6 @@ class InvoiceController with ChangeNotifier {
     lastEnterDate = 'null';
     buyCarDate = 'null';
     isFinanced = 'Financed';
-
-    isEdit = true;
-    rawImage.value = null;
-    control.clear();
 
     loader = false;
   }
@@ -186,13 +183,12 @@ class InvoiceController with ChangeNotifier {
   validateCustomerInfo(BuildContext context) {
     FocusScope.of(context).unfocus();
     if (nameController.text.length > 0) {
-      if (dateController.text.length > 0) {
-        if (driverLicController.text.length > 0) {
-          if (phoneController.text.length > 0) {
-            if (addressController.text.length > 0) {
-              if (emailController.text.length > 0 && EmailValidator.validate(emailController.text)) {
-                validateVehicleInfo(context);
-                /*if (paidAmountController.text.length > 0) {
+      if (driverLicController.text.length > 0) {
+        if (phoneController.text.length > 0) {
+          if (addressController.text.length > 0) {
+            if (emailController.text.length > 0 && EmailValidator.validate(emailController.text)) {
+              validateVehicleInfo(context);
+              /*if (paidAmountController.text.length > 0) {
                   if (balanceController.text.length > 0) {
                   } else {
                     snackbar(context: context, message: 'Please write customer balance');
@@ -200,20 +196,17 @@ class InvoiceController with ChangeNotifier {
                 } else {
                   snackbar(context: context, message: 'Please write customer\'s paid amount');
                 }*/
-              } else {
-                snackbar(context: context, message: 'Please enter valid email');
-              }
             } else {
-              snackbar(context: context, message: 'Please write customer address');
+              snackbar(context: context, message: 'Please enter valid email');
             }
           } else {
-            snackbar(context: context, message: 'Please write customer contact no');
+            snackbar(context: context, message: 'Please write customer address');
           }
         } else {
-          snackbar(context: context, message: 'Please write your driver lic');
+          snackbar(context: context, message: 'Please write customer contact no');
         }
       } else {
-        snackbar(context: context, message: 'Please write your invoice date');
+        snackbar(context: context, message: 'Please write your driver lic');
       }
     } else {
       snackbar(context: context, message: 'Please write your name');
@@ -363,7 +356,6 @@ class InvoiceController with ChangeNotifier {
     var signingImage = convert.base64Encode(rawImage.value.buffer.asUint8List());
     Map body = {
       "customer_name": nameController.text.length > 0 ? nameController.text : '',
-      "date": dateController.text.length > 0 ? dateController.text : '',
       "driver_lic": driverLicController.text,
       "phone_no": phoneController.text,
       "address": addressController.text,

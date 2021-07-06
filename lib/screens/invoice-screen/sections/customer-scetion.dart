@@ -25,7 +25,7 @@ class CustomerSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -54,24 +54,6 @@ class CustomerSection extends StatelessWidget {
                     Flexible(
                       child: CustomerTextField(
                         controller: controller.driverLicController,
-                        inputType: TextInputType.text,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: block),
-              Expanded(
-                flex: 2,
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    InvoiceTitle(title: 'DATE', isRequired: true),
-                    SizedBox(width: block),
-                    Flexible(
-                      child: CustomerTextField(
-                        controller: controller.dateController,
                         inputType: TextInputType.text,
                       ),
                     ),

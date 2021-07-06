@@ -28,7 +28,6 @@ class TakePhotoController with ChangeNotifier {
     final imageFile = await imagePicker.getImage(source: ImageSource.camera, maxHeight: 720, maxWidth: 600);
     if (imageFile != null) {
       selectedImage = File(imageFile.path);
-      log(selectedImage.path);
       notifyListeners();
     } else {
       snackbar(context: context, message: 'Image Not Picked');

@@ -24,7 +24,7 @@ class CustomerInfo extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: InvoiceTitle(
                     title: controller.nameController.text.length < 1
                         ? 'CUSTOMER NAME: No Name Inserted'
@@ -38,15 +38,6 @@ class CustomerInfo extends StatelessWidget {
                     title: controller.driverLicController.text.length < 1
                         ? 'DRIVER LIC: No LIC Found'
                         : 'DRIVER LIC: ${controller.driverLicController.text}',
-                    isRequired: false),
-              ),
-              SizedBox(width: block),
-              Expanded(
-                flex: 2,
-                child: InvoiceTitle(
-                    title: controller.dateController.text.length < 1
-                        ? 'DATE: No Date Found'
-                        : 'DATE: ${controller.dateController.text}',
                     isRequired: false),
               ),
             ],
