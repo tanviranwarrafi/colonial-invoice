@@ -327,22 +327,14 @@ class InvoiceController with ChangeNotifier {
   viewInvoiceOnTap({BuildContext context}) {
     FocusScope.of(context).unfocus();
     if (estimatedValue.text.length > 0) {
-      if (bankName.text.length > 0) {
-        if (bankAddress.text.length > 0) {
-          if (lastEnterDate != 'null') {
-            if (buyCarDate != 'null') {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ViewInvoiceScreen()));
-            } else {
-              snackbar(context: context, message: 'Please select buy car date');
-            }
-          } else {
-            snackbar(context: context, message: 'Please select last enter date');
-          }
+      if (lastEnterDate != 'null') {
+        if (buyCarDate != 'null') {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => ViewInvoiceScreen()));
         } else {
-          snackbar(context: context, message: 'Please write bank address');
+          snackbar(context: context, message: 'Please select buy car date');
         }
       } else {
-        snackbar(context: context, message: 'Please write bank name');
+        snackbar(context: context, message: 'Please select last enter date');
       }
     } else {
       snackbar(context: context, message: 'Please write estimated value');

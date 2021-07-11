@@ -70,7 +70,6 @@ class CustomerTextField extends StatelessWidget {
         focusedBorder: outlineBorder(color: Colors.white),
         focusedErrorBorder: outlineBorder(color: Colors.white),
       ),
-      // validator: (text) => validators.validateName(value: text),
       onSaved: (text) => controller.text = text,
     );
   }
